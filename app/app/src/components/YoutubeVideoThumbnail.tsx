@@ -22,7 +22,10 @@ const useStyles = makeStyles((theme: Theme) =>
             },
             filter: "blur(1px) saturate(300%)",
             marginBottom: theme.spacing(1.5),
-        }
+        },
+        channelTitle: {
+            marginTop: theme.spacing(0.5),
+        },
     })
 )
 
@@ -36,9 +39,13 @@ interface YoutubeVideoThumbnailProps {
         alt: string
         src: string
     }
+    channel: {
+        youtubeId: string
+        title: string
+    }
 }
 
-function YoutubeVideoThumbnail({ youtubeId, title, thumbnailImage, avatarImage }: YoutubeVideoThumbnailProps) {
+function YoutubeVideoThumbnail({ youtubeId, title, thumbnailImage, avatarImage, channel }: YoutubeVideoThumbnailProps) {
     const classes = useStyles();
     const navigate = useNavigate();
 
@@ -49,11 +56,14 @@ function YoutubeVideoThumbnail({ youtubeId, title, thumbnailImage, avatarImage }
             <Box className={classes.thumbnail} style={{backgroundImage: `url('${thumbnailImage.src}')`}} />
             <Grid container spacing={1}>
                 <Grid item xs={2}>
-                    <Avatar alt={avatarImage.alt} src={avatarImage.src} />
+                    <Avatar {...avatarImage} />
                 </Grid>
                 <Grid item xs={10}>
-                    <Typography variant="subtitle2" color="textPrimary">
+                    <Typography variant="subtitle1" color="textPrimary">
                         { title }
+                    </Typography>
+                    <Typography variant="body2" color="textSecondary" className={classes.channelTitle}>
+                        { channel.title }
                     </Typography>
                 </Grid>
             </Grid>

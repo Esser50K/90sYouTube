@@ -37,6 +37,9 @@ const theme = createTheme({
     fontSize: 24,
     allVariants: {
       lineHeight: 0.74,
+    },
+    subtitle1: {
+      fontWeight: 600,
     }
   },
   overrides: {

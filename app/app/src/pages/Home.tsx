@@ -31,6 +31,10 @@ function Home() {
                     alt: 'Esser50k',
                     src: '/images/avatar/Esser50k.jpg'
                 },
+                channel: {
+                    youtubeId: 'UCBxzOQd2v9wWfiMDrf_RQ7A',
+                    title: 'Esser50k',
+                },
             }
         },
         {
@@ -44,6 +48,10 @@ function Home() {
                 avatarImage: {
                     alt: 'Esser50k',
                     src: '/images/avatar/Esser50k.jpg'
+                },
+                channel: {
+                    youtubeId: 'UCBxzOQd2v9wWfiMDrf_RQ7A',
+                    title: 'Esser50k',
                 },
             }
         },
@@ -59,6 +67,10 @@ function Home() {
                     alt: 'Esser50k',
                     src: '/images/avatar/Esser50k.jpg'
                 },
+                channel: {
+                    youtubeId: 'UCBxzOQd2v9wWfiMDrf_RQ7A',
+                    title: 'Esser50k',
+                },
             }
         },
         {
@@ -72,6 +84,10 @@ function Home() {
                 avatarImage: {
                     alt: 'Esser50k',
                     src: '/images/avatar/Esser50k.jpg'
+                },
+                channel: {
+                    youtubeId: 'UCBxzOQd2v9wWfiMDrf_RQ7A',
+                    title: 'Esser50k',
                 },
             }
         },
@@ -87,6 +103,10 @@ function Home() {
                     alt: 'Esser50k',
                     src: '/images/avatar/Esser50k.jpg'
                 },
+                channel: {
+                    youtubeId: 'UCBxzOQd2v9wWfiMDrf_RQ7A',
+                    title: 'Esser50k',
+                },
             }
         },
         {
@@ -100,6 +120,10 @@ function Home() {
                 avatarImage: {
                     alt: 'Esser50k',
                     src: '/images/avatar/Esser50k.jpg'
+                },
+                channel: {
+                    youtubeId: 'UCBxzOQd2v9wWfiMDrf_RQ7A',
+                    title: 'Esser50k',
                 },
             }
         },
@@ -115,6 +139,10 @@ function Home() {
                     alt: 'Esser50k',
                     src: '/images/avatar/Esser50k.jpg'
                 },
+                channel: {
+                    youtubeId: 'UCBxzOQd2v9wWfiMDrf_RQ7A',
+                    title: 'Esser50k',
+                },
             }
         },
         {
@@ -128,6 +156,10 @@ function Home() {
                 avatarImage: {
                     alt: 'Esser50k',
                     src: '/images/avatar/Esser50k.jpg'
+                },
+                channel: {
+                    youtubeId: 'UCBxzOQd2v9wWfiMDrf_RQ7A',
+                    title: 'Esser50k',
                 },
             }
         }
