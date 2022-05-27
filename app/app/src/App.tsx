@@ -34,7 +34,7 @@ const theme = createTheme({
     }
   },
   typography: {
-    fontFamily: "'Pixelated Times New Roman', 'Times New Roman'",
+    fontFamily: "'Pixelated Times New Roman', 'Times New Roman', serif",
     fontSize: 24,
     allVariants: {
       lineHeight: 0.74,
