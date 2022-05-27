@@ -1,4 +1,4 @@
-import React, {FormEvent, useEffect, useState} from "react";
+import React, {FormEvent, ReactElement, useEffect, useState} from "react";
 import {Outlet, useNavigate, useSearchParams} from "react-router-dom";
 import {
     AppBar, Button,
@@ -17,13 +17,35 @@ import PlayCircleFilled from "@material-ui/icons/PlayCircleFilled";
 import Box from "@material-ui/core/Box";
 import DonateButton from "../components/DonateButton";
 import {createTheme} from "@material-ui/core/styles";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 
 const drawerWidth = 240;
+
+const darkTheme = createTheme({
+    palette: {
+        type: 'dark',
+        background: {
+            default: '#000',
+            paper: '#000',
+        },
+    },
+    typography: {
+        fontFamily: "'Pixelated Times New Roman', 'Times New Roman'",
+        fontSize: 24,
+        allVariants: {
+            lineHeight: 0.74,
+        }
+    },
+});
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         root: {
-          display: 'flex',
+            display: 'flex',
+            flexDirection: 'column',
+            [theme.breakpoints.up('md')]: {
+                flexDirection: 'row',
+            },
         },
         grow: {
             flexGrow: 1,
@@ -81,15 +103,30 @@ const useStyles = makeStyles((theme: Theme) =>
         },
         toolbarEnd: {
             width: '290px',
+            display: 'none',
+            [theme.breakpoints.up('lg')]: {
+                display: 'block',
+            },
         },
         appBarSpacer: theme.mixins.toolbar,
         drawer: {
             width: drawerWidth,
             flexShrink: 0,
+            order: 2,
+            [theme.breakpoints.up('md')]: {
+                order: 1,
+            }
         },
         drawerPaper: {
             width: drawerWidth,
             paddingTop: theme.spacing(2.5),
+        },
+        infoBoxesAndDonation: {
+            background: darkTheme.palette.background.default,
+            order: 2,
+            [theme.breakpoints.up('md')]: {
+                order: 1,
+            }
         },
         introBox: {
             margin: theme.spacing(2),
@@ -109,6 +146,10 @@ const useStyles = makeStyles((theme: Theme) =>
             flexGrow: 1,
             height: '100vh',
             overflow: 'auto',
+            order: 1,
+            [theme.breakpoints.up('md')]: {
+                order: 2,
+            }
         },
         container: {
             padding: theme.spacing(4, 2, 4, 2),
@@ -134,26 +175,11 @@ const useStyles = makeStyles((theme: Theme) =>
     }),
 );
 
-const darkTheme = createTheme({
-    palette: {
-        type: 'dark',
-        background: {
-            default: '#000',
-            paper: '#000',
-        },
-    },
-    typography: {
-        fontFamily: "'Pixelated Times New Roman', 'Times New Roman'",
-        fontSize: 24,
-        allVariants: {
-            lineHeight: 0.74,
-        }
-    },
-});
-
 function Layout({drawerCollapsed = false}) {
     let [searchParams] = useSearchParams();
     let navigate = useNavigate();
+    const isDesktop = useMediaQuery((theme: Theme) => theme.breakpoints.up('sm'));
+    const isDesktopMd = useMediaQuery((theme: Theme) => theme.breakpoints.up('md'));
     const [inputUrl, setInputUrl] = useState("")
     const [youtubeUrl, setYoutubeUrl] = useState("")
     const classes = useStyles();
@@ -177,6 +203,28 @@ function Layout({drawerCollapsed = false}) {
         setYoutubeUrl(`https://www.youtube.com/watch?v=${searchParams.get('v') || 'c7rarQiUmng'}`)
     }, [searchParams])
 
+    const infoBoxesAndDonation: ReactElement = (
+        <>
+            <Box className={classes.introBox}>
+                <Typography variant="body2">Paste a YouTube video link to ASCIIfy it on the fly!</Typography>
+            </Box>
+            <Container>
+                <Typography variant="subtitle1">- or -</Typography>
+            </Container>
+            <Box className={classes.introBox}>
+                <Typography variant="body2">Click to select or drag an image on this box to ASCIIfy it</Typography>
+            </Box>
+            <Container className={classes.donateContainer}>
+                <img src="/images/moneyfall.gif" alt="Money falling" />
+                <Box className={classes.donateButton}>
+                    <DonateButton/>
+                </Box>
+                <Typography variant="body2">To support my server costs <br/> and development efforts
+                    C:</Typography>
+            </Container>
+        </>
+    )
+
     return (
         <div className={classes.root}>
             <CssBaseline/>
@@ -196,7 +244,9 @@ function Layout({drawerCollapsed = false}) {
                         </Typography>
                     </div>
                     <Box className={classes.videoUrl}>
-                        <Typography>YouTube video link:</Typography>
+                        { isDesktop &&
+                            <Typography>YouTube video link:</Typography>
+                        }
                         <div className={classes.search}>
                             <form className={classes.form} onSubmit={onYTUrlSubmit}>
                                 <InputBase
@@ -209,47 +259,33 @@ function Layout({drawerCollapsed = false}) {
                                     onChange={onYTUrlChange}
                                     value={inputUrl}
                                 />
-                                { inputUrl ?
-                                    <Button className={classes.convertButton} variant="outlined" size="small" color="inherit" aria-label="convert from url" type="submit">
-                                        <PlayCircleFilled/>
-                                    </Button> : <Box className={classes.convertButtonPlaceholder} />
-                                }
+                                <Button className={classes.convertButton} variant="outlined" size="small" color="inherit" aria-label="convert from url" type="submit">
+                                    <PlayCircleFilled/>
+                                </Button>
                             </form>
                         </div>
                     </Box>
                     <div className={classes.toolbarEnd}/>
                 </Toolbar>
             </AppBar>
-            <div className={classes.appBarSpacer}/>
+            { isDesktopMd && <div className={classes.appBarSpacer}/> }
             { !drawerCollapsed &&
                 <ThemeProvider theme={darkTheme}>
-                    <Drawer
-                        className={classes.drawer}
-                        variant="permanent"
-                        classes={{
-                            paper: classes.drawerPaper,
-                        }}
-                    >
-                        <div className={classes.appBarSpacer}/>
-                        <Box className={classes.introBox}>
-                            <Typography variant="body2">Paste a YouTube video link to ASCIIfy it on the fly!</Typography>
+                    {isDesktopMd ?
+                        <Drawer
+                            className={classes.drawer}
+                            variant="permanent"
+                            classes={{
+                                paper: classes.drawerPaper,
+                            }}
+                        >
+                            <div className={classes.appBarSpacer}/>
+                            {infoBoxesAndDonation}
+                        </Drawer> :
+                        <Box className={classes.infoBoxesAndDonation}>
+                            {infoBoxesAndDonation}
                         </Box>
-                        <Container>
-                            <Typography variant="subtitle1">- or -</Typography>
-                        </Container>
-                        <Box className={classes.introBox}>
-                            <Typography variant="body2">Click to select or drag an image on this box to ASCIIfy
-                                it</Typography>
-                        </Box>
-                        <Container className={classes.donateContainer}>
-                            <img src="/images/moneyfall.gif" alt="Money falling" />
-                            <Box className={classes.donateButton}>
-                                <DonateButton/>
-                            </Box>
-                            <Typography variant="body2">To support my server costs <br/> and development efforts
-                                C:</Typography>
-                        </Container>
-                    </Drawer>
+                    }
                 </ThemeProvider>
             }
             <div className={classes.content}>

@@ -2,10 +2,6 @@ input:focus {
   outline: none;
 }
 
-.app {
-  background-image: url('backgrounds/code.gif')
-}
-
 .donate-btn-wrap {
   display: flex;
   flex-direction: column;

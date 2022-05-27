@@ -1,23 +1,8 @@
 import React from "react";
 import Grid from "@material-ui/core/Grid";
 import YoutubeVideoThumbnail from "../components/YoutubeVideoThumbnail";
-import Box from "@material-ui/core/Box";
-import {createStyles, makeStyles, Theme} from "@material-ui/core";
-
-const useStyles = makeStyles((theme: Theme) =>
-    createStyles({
-        centeringBox: {
-            width: '100%',
-            padding: theme.spacing(4),
-            display: 'grid',
-            placeItems: 'center',
-        },
-    })
-)
 
 function Home() {
-    const classes = useStyles();
-
     const featuredVideos = [
         {
             id: '1',
@@ -169,14 +154,11 @@ function Home() {
         <Grid container spacing={3}>
             {
                 featuredVideos.map(featuredVideo => (
-                    <Grid key={featuredVideo.id} item xs={3}>
+                    <Grid key={featuredVideo.id} item xs={12} sm={6} md={4} lg={3}>
                         <YoutubeVideoThumbnail {...featuredVideo.props} />
                     </Grid>
                 ))
             }
-            <Box className={classes.centeringBox}>
-                <img src="/images/under-construction.webp" alt="Under construction sign" />
-            </Box>
         </Grid>
     )
 }
