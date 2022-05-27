@@ -13,8 +13,7 @@ const ptnr = {
   fontStyle: 'normal',
   fontWeight: 400,
   src: `
-    local('Raleway'),
-    local('Raleway-Regular'),
+    local('Pixelated Times New Roman'),
     url(${PixelatedTimesNewRomanTTF}) format('woff2')
   `,
   unicodeRange:
