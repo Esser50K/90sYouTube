@@ -135,6 +135,7 @@ const useStyles = makeStyles((theme: Theme) =>
         },
         donateContainer: {
             marginTop: theme.spacing(4),
+            marginBottom: theme.spacing(4),
             display: 'grid',
             justifyContent: 'center',
             justifyItems: 'center',
@@ -214,6 +215,7 @@ function Layout({drawerCollapsed = false}) {
             <Box className={classes.introBox}>
                 <Typography variant="body2">Click to select or drag an image on this box to ASCIIfy it</Typography>
             </Box>
+            <div className={classes.grow} />
             <Container className={classes.donateContainer}>
                 <img src="/images/moneyfall.gif" alt="Money falling" />
                 <Box className={classes.donateButton}>
