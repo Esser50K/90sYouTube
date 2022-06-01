@@ -21,6 +21,7 @@ GET = "GET"
 POST = "POST"
 DELETE = "DELETE"
 
+
 @app.route("/img", methods=[POST])
 def upload():
     with tracer.start_as_current_span("parse-img"):
@@ -41,6 +42,7 @@ def upload():
     ascii_img, width, height = asciify_image(img_data, req["width"])
     return json.dumps({'img': ascii_img, 'width': width, 'height': height})
 
+
 @app.route("/img/download", methods=[POST])
 def download():
     with tracer.start_as_current_span("parse-img-download"):
@@ -58,6 +60,7 @@ def download():
     result =  send_file(img_name)
     os.remove(img_name)
     return result
+
 
 @sockets.route('/vid')
 def get_updates(ws: WebSocket):
@@ -80,7 +83,9 @@ def get_updates(ws: WebSocket):
     finally:
         ws.close()
 
+
 if __name__ == '__main__':
+    # for some reason this is required for websockets to work
     from gevent import monkey
     monkey.patch_all()
 
