@@ -3,26 +3,18 @@ import {useSearchParams} from "react-router-dom";
 import Grid from "@material-ui/core/Grid/Grid";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import AsciiPlayer from "../components/AsciiPlayer";
-import YTPlayer from "../components/YTPlayer";
 import DownloadButton from "../components/DownloadButton";
 import {Theme} from "@material-ui/core";
 import Toast from "../components/Toast";
+import {getUrl} from "../utils"
 
 function Watch() {
     const [searchParams] = useSearchParams();
     const isMobile = useMediaQuery((theme: Theme) => theme.breakpoints.down('md'));
     const [playerContent, setPlayerContent] = useState("")
-    const [muted, setMuted] = useState(true)
+    const [muted, setMuted] = useState(false)
     const [image, setImage] = useState()
     const [downloading, setDownloading] = useState(false)
-
-    const getUrl = () => {
-        if (window.location.host.startsWith("localhost") || window.location.host.startsWith("192")) {
-            return window.location.protocol + "//" + window.location.host.split(":")[0] + ":8080"
-        }
-
-        return window.location.protocol + "//" + window.location.host
-    }
 
     const hashCode = (input: string) => {
         var hash = 0, i, chr;
@@ -105,11 +97,6 @@ function Watch() {
                         onRepaint={setPlayerContent}
                         isMobile={isMobile}
                     />
-                    <YTPlayer
-                        ytURL={`https://www.youtube.com/watch?v=${searchParams.get('v')}`}
-                        mute={muted}
-                    />
-
                     {
                         playerContent !== "" &&
                             <div className='download-btn-wrap'>

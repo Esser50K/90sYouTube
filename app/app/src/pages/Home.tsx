@@ -1,154 +1,49 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Grid from "@material-ui/core/Grid";
 import YoutubeVideoThumbnail from "../components/YoutubeVideoThumbnail";
+import {getUrl} from "../utils"
 
 function Home() {
-    const featuredVideos = [
-        {
-            id: '1',
-            props: {
-                youtubeId: 'ASJ3iY0-qpQ',
-                title: 'Turning videos into TEXT? 🔠',
-                thumbnailImage: {
-                    src: '/images/video-thumbnails/1.webp'
-                },
-                avatarImage: {
-                    alt: 'Esser50k',
-                    src: '/images/avatar/Esser50k.jpg'
-                },
-                channel: {
-                    youtubeId: 'UCBxzOQd2v9wWfiMDrf_RQ7A',
-                    title: 'Esser50k',
-                },
-            }
-        },
-        {
-            id: '2',
-            props: {
-                youtubeId: '5nnVj1i3Si4',
-                title: 'BANNED from Twitter for being offensive',
-                thumbnailImage: {
-                    src: '/images/video-thumbnails/2.webp'
-                },
-                avatarImage: {
-                    alt: 'Esser50k',
-                    src: '/images/avatar/Esser50k.jpg'
-                },
-                channel: {
-                    youtubeId: 'UCBxzOQd2v9wWfiMDrf_RQ7A',
-                    title: 'Esser50k',
-                },
-            }
-        },
-        {
-            id: '3',
-            props: {
-                youtubeId: 'hId3HtBwPKo',
-                title: 'Neighbour got Caught! 😱',
-                thumbnailImage: {
-                    src: '/images/video-thumbnails/3.webp'
-                },
-                avatarImage: {
-                    alt: 'Esser50k',
-                    src: '/images/avatar/Esser50k.jpg'
-                },
-                channel: {
-                    youtubeId: 'UCBxzOQd2v9wWfiMDrf_RQ7A',
-                    title: 'Esser50k',
-                },
-            }
-        },
-        {
-            id: '4',
-            props: {
-                youtubeId: 'CxMRcBD5sE8',
-                title: 'Detecting Faces in Thousands of Videos FAST #python',
-                thumbnailImage: {
-                    src: '/images/video-thumbnails/4.webp'
-                },
-                avatarImage: {
-                    alt: 'Esser50k',
-                    src: '/images/avatar/Esser50k.jpg'
-                },
-                channel: {
-                    youtubeId: 'UCBxzOQd2v9wWfiMDrf_RQ7A',
-                    title: 'Esser50k',
-                },
-            }
-        },
-        {
-            id: '5',
-            props: {
-                youtubeId: 'if2q0XxCWQ0',
-                title: '#Python Tips, Tricks and Quirks - Hackertalk',
-                thumbnailImage: {
-                    src: '/images/video-thumbnails/5.webp'
-                },
-                avatarImage: {
-                    alt: 'Esser50k',
-                    src: '/images/avatar/Esser50k.jpg'
-                },
-                channel: {
-                    youtubeId: 'UCBxzOQd2v9wWfiMDrf_RQ7A',
-                    title: 'Esser50k',
-                },
-            }
-        },
-        {
-            id: '6',
-            props: {
-                youtubeId: 'ASJ3iY0-qpQ',
-                title: 'Exploiting my Cat for Fun and Profit #shorts',
-                thumbnailImage: {
-                    src: '/images/video-thumbnails/6.webp'
-                },
-                avatarImage: {
-                    alt: 'Esser50k',
-                    src: '/images/avatar/Esser50k.jpg'
-                },
-                channel: {
-                    youtubeId: 'UCBxzOQd2v9wWfiMDrf_RQ7A',
-                    title: 'Esser50k',
-                },
-            }
-        },
-        {
-            id: '7',
-            props: {
-                youtubeId: 'ASJ3iY0-qpQ',
-                title: 'Smart Home Cat turns on Lights #shorts',
-                thumbnailImage: {
-                    src: '/images/video-thumbnails/7.webp'
-                },
-                avatarImage: {
-                    alt: 'Esser50k',
-                    src: '/images/avatar/Esser50k.jpg'
-                },
-                channel: {
-                    youtubeId: 'UCBxzOQd2v9wWfiMDrf_RQ7A',
-                    title: 'Esser50k',
-                },
-            }
-        },
-        {
-            id: '8',
-            props: {
-                youtubeId: 'ASJ3iY0-qpQ',
-                title: 'Saving Sushi from Doom #shorts',
-                thumbnailImage: {
-                    src: '/images/video-thumbnails/8.webp'
-                },
-                avatarImage: {
-                    alt: 'Esser50k',
-                    src: '/images/avatar/Esser50k.jpg'
-                },
-                channel: {
-                    youtubeId: 'UCBxzOQd2v9wWfiMDrf_RQ7A',
-                    title: 'Esser50k',
-                },
-            }
+    const [featuredVideos, setFeaturedVideos] = useState<any[]>([])
+
+    const fetchRecommendations = async () => {
+        const resp = await fetch(getUrl("/recommendations") + "/recommendations", {
+            method: "GET",
+        })
+        if (resp.status !== 200) {
+            console.error("error downloading image:", await resp.text())
+            alert("failed to fetch recommendations")
         }
-    ]
+
+        const featuredVideos: any[] = []
+        const json = await resp.json()
+        json["recommendations"].forEach((e: any) => {
+            featuredVideos.push({
+                id: featuredVideos.length,
+                props: {
+                    youtubeId: e["video_id"],
+                    title: e["title"],
+                    thumbnailImage: {
+                        src: e["thumbnail_url"]
+                    },
+                    avatarImage: {
+                        src: e["channel_thumbnail"],
+                        alt: e["channel_title"]
+                    },
+                    channel: {
+                        youtubeId: e["channel_id"],
+                        title: e["channel_title"]
+                    }
+                }
+            })
+        });
+        setFeaturedVideos(featuredVideos)
+    }
+
+    useEffect(() => {
+        fetchRecommendations()
+    }, [])
+
 
     return (
         <Grid container spacing={3}>
