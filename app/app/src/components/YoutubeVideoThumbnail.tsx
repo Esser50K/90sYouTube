@@ -76,7 +76,7 @@ function YoutubeVideoThumbnail({ youtubeId, title, thumbnailImage, avatarImage, 
     const navigateToWatch = () => navigate(`/watch?v=${youtubeId}`)
 
     return (
-        <Card className={classes.card} elevation={9}>
+        <Card className={classes.card} elevation={6}>
             <CardActionArea className={classes.actionArea} onClick={navigateToWatch}>
                 <Box className={classes.thumbnail} style={{backgroundImage: `url('${thumbnailImage.src}')`}} />
                 <Box className={classes.videoMetadata}>
