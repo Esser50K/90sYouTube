@@ -1,16 +1,20 @@
-import {createStyles, makeStyles, Theme} from "@material-ui/core";
+import {Card, CardActionArea, createStyles, makeStyles, Theme} from "@material-ui/core";
 import Box from "@material-ui/core/Box";
-import Paper from "@material-ui/core/Paper";
 import Avatar from "@material-ui/core/Avatar";
 import Typography from "@material-ui/core/Typography";
 import {useNavigate} from "react-router-dom";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
-        thumbnailContainer: {
-            cursor: 'pointer',
-            padding: theme.spacing(2),
+        card: {
             height: '100%',
+        },
+        actionArea: {
+            display: 'grid',
+            alignContent: 'start',
+            justifyContent: 'stretch',
+            height: '100%',
+            padding: theme.spacing(2),
         },
         thumbnail: {
             backgroundSize: "cover",
@@ -31,6 +35,7 @@ const useStyles = makeStyles((theme: Theme) =>
             display: 'grid',
             gridTemplateAreas: "'avatar text'",
             gap: theme.spacing(1),
+            justifyContent: 'start',
         },
         metadataAvatar: {
             gridItem: 'avatar',
@@ -68,22 +73,24 @@ function YoutubeVideoThumbnail({ youtubeId, title, thumbnailImage, avatarImage, 
     const navigateToWatch = () => navigate(`/watch?v=${youtubeId}`)
 
     return (
-        <Paper className={classes.thumbnailContainer} onClick={navigateToWatch}>
-            <Box className={classes.thumbnail} style={{backgroundImage: `url('${thumbnailImage.src}')`}} />
-            <Box className={classes.videoMetadata}>
-                <Box className={classes.metadataAvatar}>
-                    <Avatar {...avatarImage} />
+        <Card className={classes.card}>
+            <CardActionArea className={classes.actionArea} onClick={navigateToWatch}>
+                <Box className={classes.thumbnail} style={{backgroundImage: `url('${thumbnailImage.src}')`}} />
+                <Box className={classes.videoMetadata}>
+                    <Box className={classes.metadataAvatar}>
+                        <Avatar {...avatarImage} />
+                    </Box>
+                    <Box className={classes.metadataText}>
+                        <Typography variant="body2" color="textPrimary">
+                            { title }
+                        </Typography>
+                        <Typography variant="body2" color="textSecondary" className={classes.channelTitle}>
+                            { channel.title }
+                        </Typography>
+                    </Box>
                 </Box>
-                <Box className={classes.metadataText}>
-                    <Typography variant="subtitle1" color="textPrimary">
-                        { title }
-                    </Typography>
-                    <Typography variant="body2" color="textSecondary" className={classes.channelTitle}>
-                        { channel.title }
-                    </Typography>
-                </Box>
-            </Box>
-        </Paper>
+            </CardActionArea>
+        </Card>
     )
 }
 
