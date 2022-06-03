@@ -19,9 +19,7 @@ export const lightTheme: ThemeOptions = {
     },
     typography: {
         fontFamily: '"Open Sans", "Helvetica", "Arial", sans-serif',
-        h1: {
-            fontWeight: 300,
-        },
+        fontSize: 12,
     },
     shape: {
         borderRadius: 6,
@@ -53,6 +51,7 @@ export const darkTheme: ThemeOptions = {
     },
     typography: {
         fontFamily: '"Open Sans", "Helvetica", "Arial", sans-serif',
+        fontSize: 12,
     },
     shape: {
         borderRadius: 6,

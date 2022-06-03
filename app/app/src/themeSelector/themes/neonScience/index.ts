@@ -18,6 +18,7 @@ export const darkTheme: ThemeOptions = {
     },
     typography: {
         fontFamily: '"PT Sans", "Helvetica", "Arial", sans-serif',
+        fontSize: 12,
     },
     shape: {
         borderRadius: 0,

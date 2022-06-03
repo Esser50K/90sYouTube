@@ -44,6 +44,9 @@ const useStyles = makeStyles((theme: Theme) =>
         metadataText: {
             gridItem: 'text',
         },
+        title: {
+            fontWeight: 600,
+        },
         channelTitle: {
             marginTop: theme.spacing(0.5),
         },
@@ -81,7 +84,7 @@ function YoutubeVideoThumbnail({ youtubeId, title, thumbnailImage, avatarImage, 
                         <Avatar {...avatarImage} />
                     </Box>
                     <Box className={classes.metadataText}>
-                        <Typography variant="body2" color="textPrimary">
+                        <Typography variant="body1" color="textPrimary" className={classes.title}>
                             { title }
                         </Typography>
                         <Typography variant="body2" color="textSecondary" className={classes.channelTitle}>

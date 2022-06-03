@@ -20,6 +20,7 @@ export const lightTheme: ThemeOptions = {
     },
     typography: {
         fontFamily: '"Lato", "Helvetica", "Arial", sans-serif',
+        fontSize: 12,
     },
     shape: {
         borderRadius: 12,
@@ -51,6 +52,7 @@ export const darkTheme: ThemeOptions = {
     },
     typography: {
         fontFamily: '"Lato", "Helvetica", "Arial", sans-serif',
+        fontSize: 12,
     },
     shape: {
         borderRadius: 12,

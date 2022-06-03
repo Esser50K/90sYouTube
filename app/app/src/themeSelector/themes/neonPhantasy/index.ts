@@ -19,6 +19,7 @@ export const lightTheme: ThemeOptions = {
     },
     typography: {
         fontFamily: '"PT Sans", "Helvetica", "Arial", sans-serif',
+        fontSize: 12,
     },
     videoThumbnail: {
         borderTopRightRadius: 0,
@@ -64,7 +65,7 @@ export const darkTheme: ThemeOptions = {
     },
     typography: {
         fontFamily: '"PT Sans", "Helvetica", "Arial", sans-serif',
-        fontSize: 14,
+        fontSize: 12,
     },
     shape: {
         borderRadius: 0,
