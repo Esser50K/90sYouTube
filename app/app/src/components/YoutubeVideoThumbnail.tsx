@@ -1,5 +1,6 @@
 import {createStyles, makeStyles, Theme} from "@material-ui/core";
 import Box from "@material-ui/core/Box";
+import Paper from "@material-ui/core/Paper";
 import Avatar from "@material-ui/core/Avatar";
 import Typography from "@material-ui/core/Typography";
 import {useNavigate} from "react-router-dom";
@@ -8,7 +9,8 @@ const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         thumbnailContainer: {
             cursor: 'pointer',
-            border: "4px ridge white",
+            padding: theme.spacing(2),
+            height: '100%',
         },
         thumbnail: {
             backgroundSize: "cover",
@@ -19,8 +21,11 @@ const useStyles = makeStyles((theme: Theme) =>
                 height: 0,
                 paddingBottom: "calc(100% / (16/9))",
             },
-            filter: "blur(1px) saturate(300%)",
             marginBottom: theme.spacing(1.5),
+            borderTopRightRadius: theme.videoThumbnail.borderTopRightRadius,
+            borderBottomRightRadius: theme.videoThumbnail.borderBottomRightRadius,
+            borderBottomLeftRadius: theme.videoThumbnail.borderBottomLeftRadius,
+            borderTopLeftRadius: theme.videoThumbnail.borderTopLeftRadius,
         },
         videoMetadata: {
             display: 'grid',
@@ -63,7 +68,7 @@ function YoutubeVideoThumbnail({ youtubeId, title, thumbnailImage, avatarImage, 
     const navigateToWatch = () => navigate(`/watch?v=${youtubeId}`)
 
     return (
-        <Box className={classes.thumbnailContainer} bgcolor="background.paper" onClick={navigateToWatch}>
+        <Paper className={classes.thumbnailContainer} onClick={navigateToWatch}>
             <Box className={classes.thumbnail} style={{backgroundImage: `url('${thumbnailImage.src}')`}} />
             <Box className={classes.videoMetadata}>
                 <Box className={classes.metadataAvatar}>
@@ -78,7 +83,7 @@ function YoutubeVideoThumbnail({ youtubeId, title, thumbnailImage, avatarImage, 
                     </Typography>
                 </Box>
             </Box>
-        </Box>
+        </Paper>
     )
 }
 

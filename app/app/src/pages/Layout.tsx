@@ -16,27 +16,10 @@ import MenuIcon from "@material-ui/icons/Menu";
 import PlayCircleFilled from "@material-ui/icons/PlayCircleFilled";
 import Box from "@material-ui/core/Box";
 import DonateButton from "../components/DonateButton";
-import {createTheme} from "@material-ui/core/styles";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
+import {darkTheme} from "../themes/vacays";
 
 const drawerWidth = 240;
-
-const darkTheme = createTheme({
-    palette: {
-        type: 'dark',
-        background: {
-            default: '#000',
-            paper: '#000',
-        },
-    },
-    typography: {
-        fontFamily: "'Pixelated Times New Roman', 'Times New Roman'",
-        fontSize: 24,
-        allVariants: {
-            lineHeight: 0.74,
-        }
-    },
-});
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -217,7 +200,6 @@ function Layout({drawerCollapsed = false}) {
             </Box>
             <div className={classes.grow} />
             <Container className={classes.donateContainer}>
-                <img src="/images/moneyfall.gif" alt="Money falling" />
                 <Box className={classes.donateButton}>
                     <DonateButton/>
                 </Box>
