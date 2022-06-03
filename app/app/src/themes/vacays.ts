@@ -1,4 +1,5 @@
 import {createTheme} from "@material-ui/core/styles";
+import 'typeface-lato';
 
 const thumbnailBorderRadius = 9
 

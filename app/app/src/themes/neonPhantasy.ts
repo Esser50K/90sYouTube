@@ -1,5 +1,6 @@
 // @ts-nocheck
 import {createTheme} from "@material-ui/core/styles";
+import 'typeface-pt-sans';
 
 export const lightTheme = createTheme({
     palette: {

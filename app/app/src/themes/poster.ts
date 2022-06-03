@@ -1,4 +1,5 @@
 import {createTheme} from "@material-ui/core/styles";
+import 'typeface-open-sans';
 
 export const lightTheme = createTheme({
     palette: {
