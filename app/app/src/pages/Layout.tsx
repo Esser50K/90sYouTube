@@ -11,12 +11,12 @@ import {
     Typography,
     Paper, useTheme
 } from "@material-ui/core";
-import PlayCircleFilled from "@material-ui/icons/PlayCircleFilled";
 import Box from "@material-ui/core/Box";
 import DonateButton from "../components/DonateButton";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import {CustomThemeContext} from "../themeSelector/CustomThemeProvider";
 import {themes} from "../themeSelector";
+import PlayArrowOutlined from "@material-ui/icons/PlayArrowOutlined";
 
 const drawerWidth = 240;
 
@@ -146,11 +146,6 @@ const useStyles = makeStyles((theme: Theme) =>
             height: '48px',
             width: '40px',
         },
-        convertButtonPlaceholder: {
-            paddingLeft: theme.spacing(1),
-            display: 'inline-flex',
-            width: '64px',
-        }
     }),
 );
 
@@ -238,7 +233,7 @@ function Layout({drawerCollapsed = false}) {
                                     value={inputUrl}
                                 />
                                 <Button className={classes.convertButton} variant="contained" size="small" color="secondary" aria-label="convert from url" type="submit">
-                                    <PlayCircleFilled/>
+                                    <PlayArrowOutlined fontSize="large"/>
                                 </Button>
                             </form>
                         </div>
