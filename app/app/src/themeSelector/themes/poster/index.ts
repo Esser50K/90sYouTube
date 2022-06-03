@@ -69,6 +69,13 @@ export const lightTheme: ThemeOptions = {
             xl: 2280,
         },
     },
+    overrides: {
+        MuiButton: {
+            containedSecondary: {
+                color: 'white',
+            },
+        },
+    },
 }
 
 export const darkTheme: ThemeOptions = {
@@ -135,6 +142,13 @@ export const darkTheme: ThemeOptions = {
             md: 960,
             lg: 1280,
             xl: 2280,
+        },
+    },
+    overrides: {
+        MuiButton: {
+            containedSecondary: {
+                color: 'white',
+            },
         },
     },
 }
