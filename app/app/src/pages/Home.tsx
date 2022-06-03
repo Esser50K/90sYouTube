@@ -154,7 +154,7 @@ function Home() {
         <Grid container spacing={3}>
             {
                 featuredVideos.map(featuredVideo => (
-                    <Grid key={featuredVideo.id} item xs={12} sm={6} md={4} lg={3}>
+                    <Grid key={featuredVideo.id} item xs={12} sm={6} md={4} lg={3} xl={2}>
                         <YoutubeVideoThumbnail {...featuredVideo.props} />
                     </Grid>
                 ))
