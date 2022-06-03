@@ -10,7 +10,8 @@ import {
     makeStyles, Theme,
     ThemeProvider,
     Toolbar,
-    Typography
+    Typography,
+    Paper
 } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 import PlayCircleFilled from "@material-ui/icons/PlayCircleFilled";
@@ -62,7 +63,6 @@ const useStyles = makeStyles((theme: Theme) =>
         },
         search: {
             position: 'relative',
-            borderRadius: theme.shape.borderRadius,
             marginRight: theme.spacing(2),
             marginLeft: 0,
             width: '100%',
@@ -74,7 +74,7 @@ const useStyles = makeStyles((theme: Theme) =>
         inputRoot: {
             color: theme.palette.text.primary,
             background: theme.palette.background.paper,
-            border: '4px ridge white',
+            borderRadius: theme.shape.borderRadius,
         },
         inputInput: {
             padding: theme.spacing(0.5, 1, 0.5, 1),
@@ -105,7 +105,6 @@ const useStyles = makeStyles((theme: Theme) =>
             paddingTop: theme.spacing(2.5),
         },
         infoBoxesAndDonation: {
-            background: darkTheme.palette.background.default,
             order: 2,
             [theme.breakpoints.up('md')]: {
                 order: 1,
@@ -114,7 +113,6 @@ const useStyles = makeStyles((theme: Theme) =>
         introBox: {
             margin: theme.spacing(2),
             padding: theme.spacing(2),
-            background: theme.palette.info.main,
         },
         donateContainer: {
             marginTop: theme.spacing(4),
@@ -189,15 +187,9 @@ function Layout({drawerCollapsed = false}) {
 
     const infoBoxesAndDonation: ReactElement = (
         <>
-            <Box className={classes.introBox}>
+            <Paper variant="outlined" className={classes.introBox}>
                 <Typography variant="body2">Paste a YouTube video link to ASCIIfy it on the fly!</Typography>
-            </Box>
-            <Container>
-                <Typography variant="subtitle1">- or -</Typography>
-            </Container>
-            <Box className={classes.introBox}>
-                <Typography variant="body2">Click to select or drag an image on this box to ASCIIfy it</Typography>
-            </Box>
+            </Paper>
             <div className={classes.grow} />
             <Container className={classes.donateContainer}>
                 <Box className={classes.donateButton}>
