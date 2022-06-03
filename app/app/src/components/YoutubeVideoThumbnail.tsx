@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme: Theme) =>
             alignContent: 'start',
             justifyContent: 'stretch',
             height: '100%',
-            padding: theme.spacing(2),
+            padding: theme.spacing(1.5),
         },
         thumbnail: {
             backgroundSize: "cover",
@@ -76,7 +76,7 @@ function YoutubeVideoThumbnail({ youtubeId, title, thumbnailImage, avatarImage, 
     const navigateToWatch = () => navigate(`/watch?v=${youtubeId}`)
 
     return (
-        <Card className={classes.card}>
+        <Card className={classes.card} elevation={9}>
             <CardActionArea className={classes.actionArea} onClick={navigateToWatch}>
                 <Box className={classes.thumbnail} style={{backgroundImage: `url('${thumbnailImage.src}')`}} />
                 <Box className={classes.videoMetadata}>

@@ -216,7 +216,7 @@ function Layout({drawerCollapsed = false}) {
     return (
         <div className={classes.root}>
             <CssBaseline/>
-            <AppBar className={classes.appBar} position="fixed">
+            <AppBar className={classes.appBar} position="fixed" elevation={0}>
                 <Toolbar className={classes.toolbar}>
                     <div className={classes.toolbarStart}>
                         <img onClick={navigateToHome} src={theme.logo.src} className={classes.logo} alt="90s YouTube logo" />

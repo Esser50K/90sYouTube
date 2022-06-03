@@ -47,6 +47,33 @@ export const lightTheme: ThemeOptions = {
     logo: {
         src: logo,
     },
+    shadows: [
+        'none',
+        'none',
+        'none',
+        'none',
+        'none',
+        'none',
+        'none',
+        'none',
+        'none',
+        'none',
+        'none',
+        'none',
+        'none',
+        'none',
+        'none',
+        'none',
+        'none',
+        'none',
+        'none',
+        'none',
+        'none',
+        'none',
+        'none',
+        'none',
+        'none',
+    ],
     breakpoints: {
         values: {
             xs: 0,
@@ -54,6 +81,11 @@ export const lightTheme: ThemeOptions = {
             md: 960,
             lg: 1280,
             xl: 2280,
+        },
+    },
+    props: {
+        MuiPaper: {
+            variant: 'outlined',
         },
     },
 }
@@ -88,6 +120,33 @@ export const darkTheme: ThemeOptions = {
     logo: {
         src: logo,
     },
+    shadows: [
+        'none',
+        'none',
+        'none',
+        'none',
+        'none',
+        'none',
+        'none',
+        'none',
+        'none',
+        'none',
+        'none',
+        'none',
+        'none',
+        'none',
+        'none',
+        'none',
+        'none',
+        'none',
+        'none',
+        'none',
+        'none',
+        'none',
+        'none',
+        'none',
+        'none',
+    ],
     breakpoints: {
         values: {
             xs: 0,
@@ -120,6 +179,9 @@ export const darkTheme: ThemeOptions = {
     props: {
         MuiAppBar: {
             color: 'inherit',
+        },
+        MuiPaper: {
+            variant: 'outlined',
         },
     },
 }

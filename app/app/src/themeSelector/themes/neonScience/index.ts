@@ -32,6 +32,33 @@ export const darkTheme: ThemeOptions = {
     logo: {
         src: logo,
     },
+    shadows: [
+        'none',
+        'none',
+        'none',
+        'none',
+        'none',
+        'none',
+        'none',
+        'none',
+        'none',
+        'none',
+        'none',
+        'none',
+        'none',
+        'none',
+        'none',
+        'none',
+        'none',
+        'none',
+        'none',
+        'none',
+        'none',
+        'none',
+        'none',
+        'none',
+        'none',
+    ],
     breakpoints: {
         values: {
             xs: 0,
@@ -39,6 +66,11 @@ export const darkTheme: ThemeOptions = {
             md: 960,
             lg: 1280,
             xl: 2280,
+        },
+    },
+    props: {
+        MuiPaper: {
+            variant: 'outlined',
         },
     },
     // todo fix: To investigate why button doesn't refresh and keeps the gradient style when switching to theme w/out override
