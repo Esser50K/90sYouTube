@@ -136,7 +136,7 @@ const useStyles = makeStyles((theme: Theme) =>
             padding: theme.spacing(4, 2, 4, 2),
         },
         convertButton: {
-            margin: 0,
+            margin: theme.spacing(0, 0, 0, 0.5),
             height: '48px',
             width: '40px',
         },
@@ -232,7 +232,7 @@ function Layout({drawerCollapsed = false}) {
                                     onChange={onYTUrlChange}
                                     value={inputUrl}
                                 />
-                                <Button className={classes.convertButton} variant="outlined" size="small" color="inherit" aria-label="convert from url" type="submit">
+                                <Button className={classes.convertButton} variant="contained" size="small" color="secondary" aria-label="convert from url" type="submit">
                                     <PlayCircleFilled/>
                                 </Button>
                             </form>
