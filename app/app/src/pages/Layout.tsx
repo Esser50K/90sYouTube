@@ -5,7 +5,6 @@ import {
     Container, createStyles,
     CssBaseline,
     Drawer,
-    IconButton,
     InputBase,
     makeStyles, Theme,
     ThemeProvider,
@@ -13,7 +12,6 @@ import {
     Typography,
     Paper
 } from "@material-ui/core";
-import MenuIcon from "@material-ui/icons/Menu";
 import PlayCircleFilled from "@material-ui/icons/PlayCircleFilled";
 import Box from "@material-ui/core/Box";
 import DonateButton from "../components/DonateButton";
@@ -40,9 +38,6 @@ const useStyles = makeStyles((theme: Theme) =>
         videoUrl: {
             display: 'flex',
             alignItems: 'center',
-        },
-        menuButton: {
-            marginRight: theme.spacing(2),
         },
         toolbar: {
             justifyContent: 'space-between',
@@ -207,14 +202,6 @@ function Layout({drawerCollapsed = false}) {
             <AppBar className={classes.appBar} position="fixed">
                 <Toolbar className={classes.toolbar}>
                     <div className={classes.toolbarStart}>
-                        <IconButton
-                            edge="start"
-                            className={classes.menuButton}
-                            color="inherit"
-                            aria-label="open drawer"
-                        >
-                            <MenuIcon/>
-                        </IconButton>
                         <Typography onClick={navigateToHome} className={classes.title} variant="h6" noWrap>
                             90's YouTube
                         </Typography>
