@@ -40,6 +40,7 @@ const useStyles = makeStyles((theme: Theme) =>
             [theme.breakpoints.up('sm')]: {
                 height: '32px',
             },
+            cursor: 'pointer',
         },
         videoUrl: {
             display: 'flex',
