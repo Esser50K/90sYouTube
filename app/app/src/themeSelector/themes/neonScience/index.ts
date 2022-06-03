@@ -1,4 +1,5 @@
 import 'typeface-pt-sans';
+import logo from './logo.png'
 import {ThemeOptions} from "@material-ui/core";
 
 export const darkTheme: ThemeOptions = {
@@ -26,6 +27,9 @@ export const darkTheme: ThemeOptions = {
         borderBottomRightRadius: 0,
         borderBottomLeftRadius: 0,
         borderTopLeftRadius: 0,
+    },
+    logo: {
+        src: logo,
     },
     // todo fix: To investigate why button doesn't refresh and keeps the gradient style when switching to theme w/out override
     // overrides: {

@@ -1,4 +1,5 @@
 import 'typeface-open-sans';
+import logo from './logo.png'
 import {ThemeOptions} from "@material-ui/core";
 
 const thumbnailBorderRadius = 4
@@ -31,6 +32,9 @@ export const lightTheme: ThemeOptions = {
         borderBottomLeftRadius: thumbnailBorderRadius,
         borderTopLeftRadius: thumbnailBorderRadius,
     },
+    logo: {
+        src: logo,
+    },
 }
 
 export const darkTheme: ThemeOptions = {
@@ -58,5 +62,8 @@ export const darkTheme: ThemeOptions = {
         borderBottomRightRadius: thumbnailBorderRadius,
         borderBottomLeftRadius: thumbnailBorderRadius,
         borderTopLeftRadius: thumbnailBorderRadius,
+    },
+    logo: {
+        src: logo,
     },
 }

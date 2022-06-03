@@ -1,5 +1,6 @@
 // @ts-nocheck -- mismatch between type definition and specs - MuiAppBar is missing the colorInherit property
 import 'typeface-pt-sans';
+import logo from './logo.png'
 import {ThemeOptions} from "@material-ui/core";
 
 export const lightTheme: ThemeOptions = {
@@ -42,6 +43,9 @@ export const lightTheme: ThemeOptions = {
     shape: {
         borderRadius: 0,
     },
+    logo: {
+        src: logo,
+    },
 }
 
 export const darkTheme: ThemeOptions = {
@@ -70,6 +74,9 @@ export const darkTheme: ThemeOptions = {
         borderBottomRightRadius: 0,
         borderBottomLeftRadius: 0,
         borderTopLeftRadius: 0,
+    },
+    logo: {
+        src: logo,
     },
     overrides: {
         // todo fix: To investigate why button doesn't refresh and keeps the gradient style when switching to theme w/out override

@@ -8,6 +8,9 @@ declare module '@material-ui/core' {
             borderBottomLeftRadius: number,
             borderTopLeftRadius: number,
         },
+        logo: {
+            src: any,
+        },
     }
     export interface ThemeOptions {
         videoThumbnail: {
@@ -15,6 +18,9 @@ declare module '@material-ui/core' {
             borderBottomRightRadius: number,
             borderBottomLeftRadius: number,
             borderTopLeftRadius: number,
+        },
+        logo: {
+            src: any,
         },
     }
 }

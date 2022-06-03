@@ -9,7 +9,7 @@ import {
     makeStyles, Theme,
     Toolbar,
     Typography,
-    Paper
+    Paper, useTheme
 } from "@material-ui/core";
 import PlayCircleFilled from "@material-ui/icons/PlayCircleFilled";
 import Box from "@material-ui/core/Box";
@@ -34,6 +34,12 @@ const useStyles = makeStyles((theme: Theme) =>
         },
         appBar: {
             zIndex: theme.zIndex.drawer + 1,
+        },
+        logo: {
+            height: '24px',
+            [theme.breakpoints.up('sm')]: {
+                height: '32px',
+            },
         },
         videoUrl: {
             display: 'flex',
@@ -157,6 +163,7 @@ function Layout({drawerCollapsed = false}) {
     const [youtubeUrl, setYoutubeUrl] = useState("")
     const { currentTheme, setTheme } = useContext(CustomThemeContext)
     const classes = useStyles();
+    const theme = useTheme<Theme>()
 
     const navigateToHome = () => navigate('/');
 
@@ -212,9 +219,7 @@ function Layout({drawerCollapsed = false}) {
             <AppBar className={classes.appBar} position="fixed">
                 <Toolbar className={classes.toolbar}>
                     <div className={classes.toolbarStart}>
-                        <Typography onClick={navigateToHome} className={classes.title} variant="h6" noWrap>
-                            90's YouTube
-                        </Typography>
+                        <img onClick={navigateToHome} src={theme.logo.src} className={classes.logo} alt="90s YouTube logo" />
                     </div>
                     <Box className={classes.videoUrl}>
                         { isDesktop &&

@@ -1,4 +1,5 @@
 import 'typeface-lato';
+import logo from './logo.png'
 import {ThemeOptions} from "@material-ui/core";
 
 const thumbnailBorderRadius = 9
@@ -29,6 +30,9 @@ export const lightTheme: ThemeOptions = {
         borderBottomLeftRadius: 0,
         borderTopLeftRadius: thumbnailBorderRadius,
     },
+    logo: {
+        src: logo,
+    },
 }
 
 export const darkTheme: ThemeOptions = {
@@ -56,5 +60,8 @@ export const darkTheme: ThemeOptions = {
         borderBottomRightRadius: thumbnailBorderRadius,
         borderBottomLeftRadius: 0,
         borderTopLeftRadius: thumbnailBorderRadius,
+    },
+    logo: {
+        src: logo,
     },
 }
