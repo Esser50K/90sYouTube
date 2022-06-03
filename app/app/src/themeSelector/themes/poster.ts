@@ -1,7 +1,9 @@
-import {createTheme} from "@material-ui/core/styles";
 import 'typeface-open-sans';
+import {ThemeOptions} from "@material-ui/core";
 
-export const lightTheme = createTheme({
+const thumbnailBorderRadius = 4
+
+export const lightTheme: ThemeOptions = {
     palette: {
         type: 'light',
         primary: {
@@ -24,14 +26,14 @@ export const lightTheme = createTheme({
         borderRadius: 6,
     },
     videoThumbnail: {
-        borderTopRightRadius: 0,
-        borderBottomRightRadius: 0,
-        borderBottomLeftRadius: 0,
-        borderTopLeftRadius: 0,
+        borderTopRightRadius: thumbnailBorderRadius,
+        borderBottomRightRadius: thumbnailBorderRadius,
+        borderBottomLeftRadius: thumbnailBorderRadius,
+        borderTopLeftRadius: thumbnailBorderRadius,
     },
-})
+}
 
-export const darkTheme = createTheme({
+export const darkTheme: ThemeOptions = {
     palette: {
         type: 'dark',
         primary: {
@@ -52,9 +54,9 @@ export const darkTheme = createTheme({
         borderRadius: 6,
     },
     videoThumbnail: {
-        borderTopRightRadius: 0,
-        borderBottomRightRadius: 0,
-        borderBottomLeftRadius: 0,
-        borderTopLeftRadius: 0,
+        borderTopRightRadius: thumbnailBorderRadius,
+        borderBottomRightRadius: thumbnailBorderRadius,
+        borderBottomLeftRadius: thumbnailBorderRadius,
+        borderTopLeftRadius: thumbnailBorderRadius,
     },
-})
+}

@@ -1,13 +1,12 @@
-import React, {FormEvent, ReactElement, useEffect, useState} from "react";
+import React, {FormEvent, ReactElement, useContext, useEffect, useState} from "react";
 import {Outlet, useNavigate, useSearchParams} from "react-router-dom";
 import {
-    AppBar, Button,
+    AppBar, Button, ButtonGroup,
     Container, createStyles,
     CssBaseline,
     Drawer,
     InputBase,
     makeStyles, Theme,
-    ThemeProvider,
     Toolbar,
     Typography,
     Paper
@@ -16,7 +15,8 @@ import PlayCircleFilled from "@material-ui/icons/PlayCircleFilled";
 import Box from "@material-ui/core/Box";
 import DonateButton from "../components/DonateButton";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
-import {darkTheme} from "../themes/vacays";
+import {CustomThemeContext} from "../themeSelector/CustomThemeProvider";
+import {themes} from "../themeSelector";
 
 const drawerWidth = 240;
 
@@ -99,6 +99,10 @@ const useStyles = makeStyles((theme: Theme) =>
             width: drawerWidth,
             paddingTop: theme.spacing(2.5),
         },
+        themesHeading: {
+            margin: theme.spacing(2),
+            textAlign: 'center',
+        },
         infoBoxesAndDonation: {
             order: 2,
             [theme.breakpoints.up('md')]: {
@@ -135,14 +139,6 @@ const useStyles = makeStyles((theme: Theme) =>
             margin: 0,
             height: '48px',
             width: '40px',
-            borderWidth: '4px',
-            borderStyle: 'outset',
-            borderColors: theme.palette.secondary.main,
-            background: theme.palette.secondary.main,
-            color: theme.palette.primary.main,
-            '&:hover': {
-                background: theme.palette.secondary.main,
-            },
         },
         convertButtonPlaceholder: {
             paddingLeft: theme.spacing(1),
@@ -159,6 +155,7 @@ function Layout({drawerCollapsed = false}) {
     const isDesktopMd = useMediaQuery((theme: Theme) => theme.breakpoints.up('md'));
     const [inputUrl, setInputUrl] = useState("")
     const [youtubeUrl, setYoutubeUrl] = useState("")
+    const { currentTheme, setTheme } = useContext(CustomThemeContext)
     const classes = useStyles();
 
     const navigateToHome = () => navigate('/');
@@ -185,6 +182,19 @@ function Layout({drawerCollapsed = false}) {
             <Paper variant="outlined" className={classes.introBox}>
                 <Typography variant="body2">Paste a YouTube video link to ASCIIfy it on the fly!</Typography>
             </Paper>
+            <Typography variant="h6" className={classes.themesHeading}>Available themes</Typography>
+            <ButtonGroup
+                orientation="vertical"
+                color="primary"
+                aria-label="vertical contained primary button group"
+                variant="text"
+            >
+                {
+                    Object.entries(themes).map(theme => (
+                        <Button key={theme[0]} onClick={() => setTheme(theme[0])} disabled={theme[0] === currentTheme}>{ theme[0] }</Button>
+                    ))
+                }
+            </ButtonGroup>
             <div className={classes.grow} />
             <Container className={classes.donateContainer}>
                 <Box className={classes.donateButton}>
@@ -233,7 +243,7 @@ function Layout({drawerCollapsed = false}) {
             </AppBar>
             { isDesktopMd && <div className={classes.appBarSpacer}/> }
             { !drawerCollapsed &&
-                <ThemeProvider theme={darkTheme}>
+                <>
                     {isDesktopMd ?
                         <Drawer
                             className={classes.drawer}
@@ -249,7 +259,7 @@ function Layout({drawerCollapsed = false}) {
                             {infoBoxesAndDonation}
                         </Box>
                     }
-                </ThemeProvider>
+                </>
             }
             <div className={classes.content}>
                 <div className={classes.appBarSpacer} />

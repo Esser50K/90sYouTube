@@ -1,9 +1,9 @@
-import {createTheme} from "@material-ui/core/styles";
 import 'typeface-lato';
+import {ThemeOptions} from "@material-ui/core";
 
 const thumbnailBorderRadius = 9
 
-export const lightTheme = createTheme({
+export const lightTheme: ThemeOptions = {
     palette: {
         type: 'light',
         primary: {
@@ -29,9 +29,9 @@ export const lightTheme = createTheme({
         borderBottomLeftRadius: 0,
         borderTopLeftRadius: thumbnailBorderRadius,
     },
-})
+}
 
-export const darkTheme = createTheme({
+export const darkTheme: ThemeOptions = {
     palette: {
         type: 'dark',
         primary: {
@@ -57,4 +57,4 @@ export const darkTheme = createTheme({
         borderBottomLeftRadius: 0,
         borderTopLeftRadius: thumbnailBorderRadius,
     },
-})
+}
