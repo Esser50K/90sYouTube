@@ -3,6 +3,7 @@ import Box from "@material-ui/core/Box";
 import Avatar from "@material-ui/core/Avatar";
 import Typography from "@material-ui/core/Typography";
 import {useNavigate} from "react-router-dom";
+import YoutubeVideoThumbnailProps from "../types/YoutubeVideoThumbnail";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -39,22 +40,6 @@ const useStyles = makeStyles((theme: Theme) =>
         },
     })
 )
-
-interface YoutubeVideoThumbnailProps {
-    youtubeId: string
-    title: string
-    thumbnailImage: {
-        src: string
-    }
-    avatarImage: {
-        alt: string
-        src: string
-    }
-    channel: {
-        youtubeId: string
-        title: string
-    }
-}
 
 function YoutubeVideoThumbnail({ youtubeId, title, thumbnailImage, avatarImage, channel }: YoutubeVideoThumbnailProps) {
     const classes = useStyles();
