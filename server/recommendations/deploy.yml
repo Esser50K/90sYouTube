@@ -1,0 +1,12 @@
+version: '3.3'
+services:
+  recommendations:
+    image: recommendations:latest
+    deploy:
+      mode: replicated
+      replicas: 1
+    environment:
+      SEARCH_TERMS: "#90syoutube,#90syoutubechallenge"
+      API_KEYS: "${API_KEYS}"
+    ports:
+      - 8887:8081

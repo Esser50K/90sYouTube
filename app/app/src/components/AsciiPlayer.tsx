@@ -1,3 +1,4 @@
+import YouTubePlayer from 'youtube-player';
 import { useEffect, useState } from 'react';
 import './AsciiPlayer.css';
 
@@ -34,6 +35,7 @@ function AsciiPlayer(props: AsciiPlayerProps) {
     const [fontSize, setFontSize] = useState(0)
     const [windowSize, setWindowSize] = useState([0, 0])
     const [playerState, setPlayerState] = useState(PlayerState.Empty)
+    const [ytPlayer, setYtPlayer] = useState<any>(null)
 
 
     const loading = [
@@ -59,7 +61,18 @@ function AsciiPlayer(props: AsciiPlayerProps) {
         props.onPlayerStateChange && props.onPlayerStateChange(state)
     }
 
+    const initYTPlayer = (videoId: string) => {
+        const ytPlayer = YouTubePlayer("youtube-player")
+        ytPlayer.loadVideoById(videoId)
+        ytPlayer.pauseVideo()
+        setYtPlayer(ytPlayer)
+        return ytPlayer
+    }
+
     const startPlayingFromURL = (ytUrl: string) => {
+        setPlayerState(PlayerState.Loading)
+        const videoId = ytUrl.split("v=")[1]
+        const ytPlayer = initYTPlayer(videoId)
         const ws = new WebSocket(getUrl().replace(window.location.protocol + "//", (isHttps() ? "wss://" : "ws://")) + "/vid")
         //const ws = new WebSocket("wss://www.asciifly.com/vid")
         var firstFrame = false
@@ -85,8 +98,7 @@ function AsciiPlayer(props: AsciiPlayerProps) {
                 setNLines(decoded.height)
                 setPlayerContent(decoded.frame)
                 props.onPlayerStart && props.onPlayerStart(decoded.frame)
-                // @ts-ignore
-                window.YTPlayer.playVideo()
+                await ytPlayer.playVideo()
                 return
             }
 
@@ -98,26 +110,12 @@ function AsciiPlayer(props: AsciiPlayerProps) {
     useEffect(() => {
         const setSize = () => { setWindowSize([window.innerWidth, window.innerHeight]) }
         window.addEventListener('resize', setSize)
-        if (window.location.pathname === "/watch" && window.location.search !== "") {
-            new URLSearchParams(window.location.search).forEach((v, k) => {
-                if (k !== "v") {
-                    return
-                }
-
-                window.addEventListener('click', () => {
-                    // @ts-ignore
-                    if (window.YTPlayer && window.YTPlayer.isMuted()) {
-                        // @ts-ignore
-                        window.YTPlayer.unMute();
-                    }
-                })
-
-                updatePlayerState(PlayerState.Loading)
-            })
-        }
-
         return () => {
             window.removeEventListener('resize', setSize)
+            // stop viodeo on component unmount
+            if (ytPlayer !== null) {
+                ytPlayer.stopVideo()
+            }
         }
     }, [])
 
@@ -207,6 +205,7 @@ function AsciiPlayer(props: AsciiPlayerProps) {
                     {playerContent}
                 </pre>
             </div>
+            <div id='youtube-player' style={{width: 0, height: 0}}></div>
         </div> : null
     );
 }
