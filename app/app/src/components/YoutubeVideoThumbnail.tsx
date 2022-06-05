@@ -62,6 +62,14 @@ function YoutubeVideoThumbnail({ youtubeId, title, thumbnailImage, avatarImage, 
 
     const navigateToWatch = () => navigate(`/watch?v=${youtubeId}`)
 
+    function decodeHtml(html: string) {
+        const txt = document.createElement("textarea");
+        txt.innerHTML = html;
+        const out = txt.value;
+        txt.remove();
+        return out;
+    }
+
     return (
         <Box className={classes.thumbnailContainer} bgcolor="background.paper" onClick={navigateToWatch}>
             <Box className={classes.thumbnail} style={{backgroundImage: `url('${thumbnailImage.src}')`}} />
@@ -71,10 +79,10 @@ function YoutubeVideoThumbnail({ youtubeId, title, thumbnailImage, avatarImage, 
                 </Box>
                 <Box className={classes.metadataText}>
                     <Typography variant="subtitle1" color="textPrimary">
-                        { title }
+                        { decodeHtml(title) }
                     </Typography>
                     <Typography variant="body2" color="textSecondary" className={classes.channelTitle}>
-                        { channel.title }
+                        { decodeHtml(channel.title) }
                     </Typography>
                 </Box>
             </Box>
