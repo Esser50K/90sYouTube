@@ -1,3 +1,4 @@
+import * as ninetiesYoutube from "./themes/ninetiesYoutube";
 import * as poster from "./themes/poster";
 import * as vacays from "./themes/vacays";
 import * as neonPhantasy from "./themes/neonPhantasy";
@@ -5,6 +6,7 @@ import * as neonScience from "./themes/neonScience";
 import {ThemeOptions} from "@material-ui/core";
 
 export const themes: {[key: string]: ThemeOptions} = {
+    'nineties-youtube-light': ninetiesYoutube.lightTheme,
     'poster-light': poster.lightTheme,
     'poster-dark': poster.darkTheme,
     'vacays-light': vacays.lightTheme,

@@ -16,7 +16,7 @@ const CustomThemeProvider = (props: { children: ReactElement }) => {
     const { children } = props
 
     // Read current theme from localStorage or maybe from an api
-    const currentTheme = localStorage.getItem('appTheme') || 'vacays-light'
+    const currentTheme = localStorage.getItem('appTheme') || 'nineties-youtube-light'
 
     // State to hold the selected theme name
     const [themeName, _setThemeName] = useState(currentTheme)

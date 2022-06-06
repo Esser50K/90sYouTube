@@ -11,6 +11,9 @@ declare module '@material-ui/core' {
         logo: {
             src: any,
         },
+        search: {
+            border: string,
+        },
     }
     export interface ThemeOptions {
         videoThumbnail: {
@@ -21,6 +24,9 @@ declare module '@material-ui/core' {
         },
         logo: {
             src: any,
+        },
+        search: {
+            border: string,
         },
     }
 }

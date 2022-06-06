@@ -34,6 +34,9 @@ export const lightTheme: ThemeOptions = {
     logo: {
         src: logo,
     },
+    search: {
+        border: 'none',
+    },
     shadows: [
         'none',
         '3px 3px 0 0 #3E3543',
@@ -101,6 +104,9 @@ export const darkTheme: ThemeOptions = {
     },
     logo: {
         src: logo,
+    },
+    search: {
+        border: 'none',
     },
     shadows: [
         'none',

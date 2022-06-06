@@ -47,6 +47,9 @@ export const lightTheme: ThemeOptions = {
     logo: {
         src: logo,
     },
+    search: {
+        border: 'none',
+    },
     shadows: [
         'none',
         'none',
@@ -119,6 +122,9 @@ export const darkTheme: ThemeOptions = {
     },
     logo: {
         src: logo,
+    },
+    search: {
+        border: 'none',
     },
     shadows: [
         'none',

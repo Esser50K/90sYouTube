@@ -32,6 +32,9 @@ export const darkTheme: ThemeOptions = {
     logo: {
         src: logo,
     },
+    search: {
+        border: 'none',
+    },
     shadows: [
         'none',
         'none',

@@ -72,6 +72,7 @@ const useStyles = makeStyles((theme: Theme) =>
                 marginLeft: theme.spacing(3),
                 width: 'auto',
             },
+            border: theme.search.border,
         },
         inputRoot: {
             color: theme.palette.text.primary,
