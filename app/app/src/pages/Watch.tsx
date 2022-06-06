@@ -1,14 +1,25 @@
 import React, {useEffect, useState} from "react";
 import {useSearchParams} from "react-router-dom";
-import Grid from "@material-ui/core/Grid/Grid";
+import Container from "@material-ui/core/Container/Container";
+import Box from "@material-ui/core/Box/Box";
+import Button from "@material-ui/core/Button/Button";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import AsciiPlayer from "../components/AsciiPlayer";
-import DownloadButton from "../components/DownloadButton";
-import {Theme} from "@material-ui/core";
+import {createStyles, makeStyles, Theme} from "@material-ui/core";
 import Toast from "../components/Toast";
 import {getUrl} from "../utils"
 import FeaturedVideos from "../components/FeaturedVideos";
 import {getRecommendations} from "../services/recommendations";
+
+const useStyles = makeStyles((theme: Theme) =>
+    createStyles({
+        downloadContainer: {
+            display: 'grid',
+            justifyContent: 'center',
+            justifyItems: 'center',
+        }
+    })
+)
 
 function Watch() {
     const [searchParams] = useSearchParams();
@@ -18,6 +29,7 @@ function Watch() {
     const [image, setImage] = useState()
     const [downloading, setDownloading] = useState(false)
     const [featuredVideos, setFeaturedVideos] = useState<any[]>([])
+    const classes = useStyles();
 
     const hashCode = (input: string) => {
         var hash = 0, i, chr;
@@ -69,8 +81,7 @@ function Watch() {
 
     return (
         <>
-            <Grid container>
-                <Grid item xs={12}>
+            <Container maxWidth="md">
                     <AsciiPlayer
                         ytURL={`https://www.youtube.com/watch?v=${searchParams.get('v')}`}
                         image={image}
@@ -79,16 +90,14 @@ function Watch() {
                         isMobile={isMobile}
                     />
                     {
-                        playerContent !== "" &&
-                            <div className='download-btn-wrap'>
-                                <DownloadButton
-                                    downloading={downloading}
-                                    onClick={downloadImage}
-                                />
-                            </div>
+                        playerContent &&
+                            <Box className={classes.downloadContainer}>
+                                <Button variant="outlined" disabled={downloading} onClick={downloadImage}>
+                                    { downloading ? 'Downloading...' : 'Download image'}
+                                </Button>
+                            </Box>
                     }
-                </Grid>
-            </Grid>
+            </Container>
             <FeaturedVideos videos={featuredVideos} />
             {muted ? <Toast text={(isMobile ? "tap" : "click") + " to unmute"}/> : null}
         </>
