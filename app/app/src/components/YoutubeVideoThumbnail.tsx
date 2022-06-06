@@ -75,6 +75,14 @@ function YoutubeVideoThumbnail({ youtubeId, title, thumbnailImage, avatarImage, 
 
     const navigateToWatch = () => navigate(`/watch?v=${youtubeId}`)
 
+    function decodeHtml(html: string) {
+        const txt = document.createElement("textarea");
+        txt.innerHTML = html;
+        const out = txt.value;
+        txt.remove();
+        return out;
+    }
+
     return (
         <Card className={classes.card} elevation={6}>
             <CardActionArea className={classes.actionArea} onClick={navigateToWatch}>
@@ -85,10 +93,10 @@ function YoutubeVideoThumbnail({ youtubeId, title, thumbnailImage, avatarImage, 
                     </Box>
                     <Box className={classes.metadataText}>
                         <Typography variant="body1" color="textPrimary" className={classes.title}>
-                            { title }
+                            { decodeHtml(title) }
                         </Typography>
                         <Typography variant="body2" color="textSecondary" className={classes.channelTitle}>
-                            { channel.title }
+                            { decodeHtml(channel.title) }
                         </Typography>
                     </Box>
                 </Box>

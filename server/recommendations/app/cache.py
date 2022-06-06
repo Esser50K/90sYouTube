@@ -95,7 +95,7 @@ class RecommendationsCache:
             return False
 
         # fill up the cache with randomly found elements
-        while len(self.cache) < self.max_cache_size:
+        while len(self.cache) < self.max_cache_size and len(recommendations) > 0:
             i = randrange(len(recommendations))
             recommendations[i], recommendations[-1] = recommendations[-1], recommendations[i]
             recommendation = recommendations.pop()
