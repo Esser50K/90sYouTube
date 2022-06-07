@@ -1,42 +1,24 @@
-import React, {FormEvent, ReactElement, useEffect, useState} from "react";
+import React, {FormEvent, ReactElement, useContext, useEffect, useState} from "react";
 import {Outlet, useNavigate, useSearchParams} from "react-router-dom";
 import {
-    AppBar, Button,
+    AppBar, Button, ButtonGroup,
     Container, createStyles,
     CssBaseline,
     Drawer,
-    IconButton,
     InputBase,
     makeStyles, Theme,
-    ThemeProvider,
     Toolbar,
-    Typography
+    Typography,
+    Paper, useTheme
 } from "@material-ui/core";
-import MenuIcon from "@material-ui/icons/Menu";
-import PlayCircleFilled from "@material-ui/icons/PlayCircleFilled";
 import Box from "@material-ui/core/Box";
 import DonateButton from "../components/DonateButton";
-import {createTheme} from "@material-ui/core/styles";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
+import {CustomThemeContext} from "../themeSelector/CustomThemeProvider";
+import {themes} from "../themeSelector";
+import PlayArrowOutlined from "@material-ui/icons/PlayArrowOutlined";
 
 const drawerWidth = 240;
-
-const darkTheme = createTheme({
-    palette: {
-        type: 'dark',
-        background: {
-            default: '#000',
-            paper: '#000',
-        },
-    },
-    typography: {
-        fontFamily: "'Pixelated Times New Roman', 'Times New Roman'",
-        fontSize: 24,
-        allVariants: {
-            lineHeight: 0.74,
-        }
-    },
-});
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -53,12 +35,16 @@ const useStyles = makeStyles((theme: Theme) =>
         appBar: {
             zIndex: theme.zIndex.drawer + 1,
         },
+        logo: {
+            height: '24px',
+            [theme.breakpoints.up('sm')]: {
+                height: '32px',
+            },
+            cursor: 'pointer',
+        },
         videoUrl: {
             display: 'flex',
             alignItems: 'center',
-        },
-        menuButton: {
-            marginRight: theme.spacing(2),
         },
         toolbar: {
             justifyContent: 'space-between',
@@ -79,7 +65,6 @@ const useStyles = makeStyles((theme: Theme) =>
         },
         search: {
             position: 'relative',
-            borderRadius: theme.shape.borderRadius,
             marginRight: theme.spacing(2),
             marginLeft: 0,
             width: '100%',
@@ -87,11 +72,12 @@ const useStyles = makeStyles((theme: Theme) =>
                 marginLeft: theme.spacing(3),
                 width: 'auto',
             },
+            border: theme.search.border,
         },
         inputRoot: {
             color: theme.palette.text.primary,
             background: theme.palette.background.paper,
-            border: '4px ridge white',
+            borderRadius: theme.shape.borderRadius,
         },
         inputInput: {
             padding: theme.spacing(0.5, 1, 0.5, 1),
@@ -121,8 +107,11 @@ const useStyles = makeStyles((theme: Theme) =>
             width: drawerWidth,
             paddingTop: theme.spacing(2.5),
         },
+        themesHeading: {
+            margin: theme.spacing(2),
+            textAlign: 'center',
+        },
         infoBoxesAndDonation: {
-            background: darkTheme.palette.background.default,
             order: 2,
             [theme.breakpoints.up('md')]: {
                 order: 1,
@@ -131,7 +120,6 @@ const useStyles = makeStyles((theme: Theme) =>
         introBox: {
             margin: theme.spacing(2),
             padding: theme.spacing(2),
-            background: theme.palette.info.main,
         },
         donateContainer: {
             marginTop: theme.spacing(4),
@@ -156,23 +144,10 @@ const useStyles = makeStyles((theme: Theme) =>
             padding: theme.spacing(4, 2, 4, 2),
         },
         convertButton: {
-            margin: 0,
+            margin: theme.spacing(0, 0, 0, 0.5),
             height: '48px',
             width: '40px',
-            borderWidth: '4px',
-            borderStyle: 'outset',
-            borderColors: theme.palette.secondary.main,
-            background: theme.palette.secondary.main,
-            color: theme.palette.primary.main,
-            '&:hover': {
-                background: theme.palette.secondary.main,
-            },
         },
-        convertButtonPlaceholder: {
-            paddingLeft: theme.spacing(1),
-            display: 'inline-flex',
-            width: '64px',
-        }
     }),
 );
 
@@ -183,7 +158,9 @@ function Layout({drawerCollapsed = false}) {
     const isDesktopMd = useMediaQuery((theme: Theme) => theme.breakpoints.up('md'));
     const [inputUrl, setInputUrl] = useState("")
     const [youtubeUrl, setYoutubeUrl] = useState("")
+    const { currentTheme, setTheme } = useContext(CustomThemeContext)
     const classes = useStyles();
+    const theme = useTheme<Theme>()
 
     const navigateToHome = () => navigate('/');
 
@@ -206,18 +183,24 @@ function Layout({drawerCollapsed = false}) {
 
     const infoBoxesAndDonation: ReactElement = (
         <>
-            <Box className={classes.introBox}>
+            <Paper variant="outlined" className={classes.introBox}>
                 <Typography variant="body2">Paste a YouTube video link to ASCIIfy it on the fly!</Typography>
-            </Box>
-            <Container>
-                <Typography variant="subtitle1">- or -</Typography>
-            </Container>
-            <Box className={classes.introBox}>
-                <Typography variant="body2">Click to select or drag an image on this box to ASCIIfy it</Typography>
-            </Box>
+            </Paper>
+            <Typography variant="h6" className={classes.themesHeading}>Available themes</Typography>
+            <ButtonGroup
+                orientation="vertical"
+                color="primary"
+                aria-label="vertical contained primary button group"
+                variant="text"
+            >
+                {
+                    Object.entries(themes).map(theme => (
+                        <Button key={theme[0]} onClick={() => setTheme(theme[0])} disabled={theme[0] === currentTheme}>{ theme[0] }</Button>
+                    ))
+                }
+            </ButtonGroup>
             <div className={classes.grow} />
             <Container className={classes.donateContainer}>
-                <img src="/images/moneyfall.gif" alt="Money falling" />
                 <Box className={classes.donateButton}>
                     <DonateButton/>
                 </Box>
@@ -230,20 +213,10 @@ function Layout({drawerCollapsed = false}) {
     return (
         <div className={classes.root}>
             <CssBaseline/>
-            <AppBar className={classes.appBar} position="fixed">
+            <AppBar className={classes.appBar} position="fixed" elevation={0}>
                 <Toolbar className={classes.toolbar}>
                     <div className={classes.toolbarStart}>
-                        <IconButton
-                            edge="start"
-                            className={classes.menuButton}
-                            color="inherit"
-                            aria-label="open drawer"
-                        >
-                            <MenuIcon/>
-                        </IconButton>
-                        <Typography onClick={navigateToHome} className={classes.title} variant="h6" noWrap>
-                            90's YouTube
-                        </Typography>
+                        <img onClick={navigateToHome} src={theme.logo.src} className={classes.logo} alt="90s YouTube logo" />
                     </div>
                     <Box className={classes.videoUrl}>
                         { isDesktop &&
@@ -261,8 +234,8 @@ function Layout({drawerCollapsed = false}) {
                                     onChange={onYTUrlChange}
                                     value={inputUrl}
                                 />
-                                <Button className={classes.convertButton} variant="outlined" size="small" color="inherit" aria-label="convert from url" type="submit">
-                                    <PlayCircleFilled/>
+                                <Button className={classes.convertButton} variant="contained" size="small" color="secondary" aria-label="convert from url" type="submit">
+                                    <PlayArrowOutlined fontSize="large"/>
                                 </Button>
                             </form>
                         </div>
@@ -272,7 +245,7 @@ function Layout({drawerCollapsed = false}) {
             </AppBar>
             { isDesktopMd && <div className={classes.appBarSpacer}/> }
             { !drawerCollapsed &&
-                <ThemeProvider theme={darkTheme}>
+                <>
                     {isDesktopMd ?
                         <Drawer
                             className={classes.drawer}
@@ -288,11 +261,11 @@ function Layout({drawerCollapsed = false}) {
                             {infoBoxesAndDonation}
                         </Box>
                     }
-                </ThemeProvider>
+                </>
             }
             <div className={classes.content}>
                 <div className={classes.appBarSpacer} />
-                <Container maxWidth="lg" className={classes.container}>
+                <Container maxWidth="xl" className={classes.container}>
                     <Outlet />
                 </Container>
             </div>
