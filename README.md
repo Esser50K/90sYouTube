@@ -4,10 +4,10 @@
 
 1. Create a new folder with a desired name in `/app/app/src/themeSelector/themes/` \
 e.g. `/app/app/src/themeSelector/themes/myCustomTheme`
-2. Pick the colors for the new theme. I recommend using an existing theme as a basis or using the [Material UI Theme Creator by bareynol](https://bareynol.github.io/mui-theme-creator/). Create both light and dark variations or just one of them.
-3. Pick the [Google Font](https://fonts.google.com/) for the new theme. Install it with `yarn add typeface-{your-font-name}`.\
+2. Pick colors for the new theme. I recommend using an existing theme as a basis or using the [Material UI Theme Creator by bareynol](https://bareynol.github.io/mui-theme-creator/). Create both light and dark variations or just one of them.
+3. Pick a [Google Font](https://fonts.google.com/) for the new theme. Install it with `yarn add typeface-{your-font-name}`.\
 e.g. `yarn add typeface-pt-sans`
-4. Create the logo variation. Use a preferred software to create a custom logo or open `/design/logo-and-styles.fig` file in [Figma](https://figma.com/) to make a variation of existing logo. Save it as `logo.png` in `myCustomTheme` folder.
+4. Create a logo variation. Use a preferred software to create a custom logo or open the `/design/logo-and-styles.fig` file in [Figma](https://figma.com/) to make a variation of the existing logo. Save it as a `logo.png` file in `myCustomTheme` folder.
 5. Create a `index.ts` file in `myCustomTheme` folder with the following structure:
 ```typescript
 import 'typeface-{your-font-name}'; // only if you use a custom font
@@ -30,7 +30,7 @@ export const lightTheme: ThemeOptions = {
     // ... add other properties of the new light theme variation
 }
 ```
-The list of available properties can be found in the [Material UI v4 documentation of the default theme](https://v4.mui.com/customization/default-theme/). This list is extended by several custom properties, which are described in `/app/app/src/types/Theme.d.ts`.
+The list of available properties can be found in [Material UI v4 documentation of the default theme](https://v4.mui.com/customization/default-theme/). This list is extended by several custom properties, which are described in `/app/app/src/types/Theme.d.ts`.
 6. Import of the new theme at the top of the `/app/app/src/themeSelector/index.ts` file:
 ```typescript
 import * as ninetiesYoutube from "./themes/ninetiesYoutube";
