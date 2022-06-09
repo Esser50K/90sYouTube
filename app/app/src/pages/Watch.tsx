@@ -54,36 +54,27 @@ function Watch() {
         window.URL.revokeObjectURL(url);
     }
 
-    const handleSubmitImage = async (e: File) => {
-        // setShowPlayer(true)
+    const handleSubmitImage = (e: any) => {
+        console.info(e)
+        setImage(e)
+        setPlayerContent(e.img)
+    }
 
-        const arrBuffer = await e.arrayBuffer()
-        if (arrBuffer === undefined) {
-            return
-        }
+    const getParams = (param: string) => {
+        return searchParams.get(param) || ''
+    }
 
-        const base64String = window.btoa(new Uint8Array(arrBuffer).reduce(function (data, byte) {
-            return data + String.fromCharCode(byte);
-        }, ''));
-        const resp = await fetch(getUrl() + "/img", {
-            method: "POST",
-            body: JSON.stringify({img: base64String, width: window.innerWidth / 4})
-        })
-        if (resp.status !== 200) {
-            console.error("error uploading image:", await resp.text())
-            alert("error processing image")
-            // setShowPlayer(false)
-        }
-
-        const decoded = await resp.json()
-        console.info(decoded)
-        setImage(decoded)
-        setPlayerContent(decoded.img)
-        // setShowPlayer(true)
+    const getYTUrl = () => {
+        return getParams('v') ? `https://www.youtube.com/watch?v=${getParams('v')}` : ''
     }
 
     useEffect(() => {
         setMuted(true)
+        const i = JSON.parse(localStorage.getItem('converted-image') || '""')
+        if (i !== '""') {
+            handleSubmitImage(i)
+        }
+        localStorage.setItem('converted-image', '')
     }, [])
 
     return (
@@ -91,7 +82,7 @@ function Watch() {
             <Grid container>
                 <Grid item xs={9}>
                     <AsciiPlayer
-                        ytURL={`https://www.youtube.com/watch?v=${searchParams.get('v')}`}
+                        ytURL={getYTUrl()}
                         image={image}
                         show={true}
                         onRepaint={setPlayerContent}
