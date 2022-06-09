@@ -1,13 +1,13 @@
 # 90sYouTube
 
-## Adding new theme
+## Adding a new theme
 
 1. Create a new folder with a desired name in `/app/app/src/themeSelector/themes/` \
 e.g. `/app/app/src/themeSelector/themes/myCustomTheme`
-2. Pick colors for the new theme. I recommend using an existing theme as a basis or using the [Material UI Theme Creator by bareynol](https://bareynol.github.io/mui-theme-creator/). Create both light and dark variations or just one of them.
+2. Pick colors for the new theme. I recommend using an existing theme as a basis or using the [Material UI Theme Creator by bareynol](https://bareynol.github.io/mui-theme-creator/). Create both light and dark variant or just one of them.
 3. Pick a [Google Font](https://fonts.google.com/) for the new theme. Install it with `yarn add typeface-{your-font-name}`.\
 e.g. `yarn add typeface-pt-sans`
-4. Create a logo variation. Use a preferred software to create a custom logo or open the `/design/logo-and-styles.fig` file in [Figma](https://figma.com/) to make a variation of the existing logo. Save it as a `logo.png` file in `myCustomTheme` folder.
+4. Create a logo variant. Use preferred software to create a custom logo or open the `/design/logo-and-styles.fig` file in [Figma](https://figma.com/) to make a variant of the existing logo. Save it as a `logo.png` file in `myCustomTheme` folder.
 5. Create a `index.ts` file in `myCustomTheme` folder with the following structure:
 ```typescript
 import 'typeface-{your-font-name}'; // only if you use a custom font
@@ -19,7 +19,7 @@ export const darkTheme: ThemeOptions = {
         type: 'dark',
         // ...
     }
-    // ... add other properties of the new dark theme variation
+    // ... add other properties of the new dark theme variant
 }
 
 export const lightTheme: ThemeOptions = {
@@ -27,7 +27,7 @@ export const lightTheme: ThemeOptions = {
         type: 'light',
         // ...
     }
-    // ... add other properties of the new light theme variation
+    // ... add other properties of the new light theme variant
 }
 ```
 The list of available properties can be found in [Material UI v4 documentation of the default theme](https://v4.mui.com/customization/default-theme/). This list is extended by several custom properties, which are described in `/app/app/src/types/Theme.d.ts`.
@@ -38,13 +38,13 @@ import * as poster from "./themes/poster";
 // ...
 import * as myCustomTheme from "./themes/myCustomTheme";
 ```
-7. In the same file add the light and dark variations of the theme to the `themes` object
+7. In the same file add the light and dark variant of the theme to the `themes` object
 ```typescript
 export const themes: {[key: string]: ThemeOptions} = {
     'nineties-youtube-light': ninetiesYoutube.lightTheme,
     // ...
-    'my-custom-theme-light': myCustomTheme.lightTheme, // only if light variation defined
-    'my-custom-theme-dark': myCustomTheme.darkTheme, // only if dark variation defined
+    'my-custom-theme-light': myCustomTheme.lightTheme, // only if light variant defined
+    'my-custom-theme-dark': myCustomTheme.darkTheme, // only if dark variant defined
 }
 ```
 8. Run `yarn start` and test the new theme by selecting it from the sidebar.

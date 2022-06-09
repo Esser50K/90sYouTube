@@ -16,15 +16,18 @@ declare module '@material-ui/core' {
         },
     }
     export interface ThemeOptions {
+        // video thumbnail's rounding of each corner
         videoThumbnail: {
             borderTopRightRadius: number,
             borderBottomRightRadius: number,
             borderBottomLeftRadius: number,
             borderTopLeftRadius: number,
         },
+        // 90sYouTube logo path
         logo: {
             src: any,
         },
+        // border around the main search (youtube link input)
         search: {
             border: string,
         },
