@@ -1,12 +1,25 @@
 import React, {useEffect, useState} from "react";
 import {useSearchParams} from "react-router-dom";
-import Grid from "@material-ui/core/Grid/Grid";
+import Container from "@material-ui/core/Container/Container";
+import Box from "@material-ui/core/Box/Box";
+import Button from "@material-ui/core/Button/Button";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import AsciiPlayer from "../components/AsciiPlayer";
-import DownloadButton from "../components/DownloadButton";
-import {Theme} from "@material-ui/core";
+import {createStyles, makeStyles, Theme} from "@material-ui/core";
 import Toast from "../components/Toast";
 import {getUrl} from "../utils"
+import FeaturedVideos from "../components/FeaturedVideos";
+import {getRecommendations} from "../services/recommendations";
+
+const useStyles = makeStyles((theme: Theme) =>
+    createStyles({
+        downloadContainer: {
+            display: 'grid',
+            justifyContent: 'center',
+            justifyItems: 'center',
+        }
+    })
+)
 
 function Watch() {
     const [searchParams] = useSearchParams();
@@ -15,6 +28,8 @@ function Watch() {
     const [muted, setMuted] = useState(false)
     const [image, setImage] = useState()
     const [downloading, setDownloading] = useState(false)
+    const [featuredVideos, setFeaturedVideos] = useState<any[]>([])
+    const classes = useStyles();
 
     const hashCode = (input: string) => {
         var hash = 0, i, chr;
@@ -54,42 +69,19 @@ function Watch() {
         window.URL.revokeObjectURL(url);
     }
 
-    const handleSubmitImage = async (e: File) => {
-        // setShowPlayer(true)
-
-        const arrBuffer = await e.arrayBuffer()
-        if (arrBuffer === undefined) {
-            return
-        }
-
-        const base64String = window.btoa(new Uint8Array(arrBuffer).reduce(function (data, byte) {
-            return data + String.fromCharCode(byte);
-        }, ''));
-        const resp = await fetch(getUrl() + "/img", {
-            method: "POST",
-            body: JSON.stringify({img: base64String, width: window.innerWidth / 4})
-        })
-        if (resp.status !== 200) {
-            console.error("error uploading image:", await resp.text())
-            alert("error processing image")
-            // setShowPlayer(false)
-        }
-
-        const decoded = await resp.json()
-        console.info(decoded)
-        setImage(decoded)
-        setPlayerContent(decoded.img)
-        // setShowPlayer(true)
-    }
-
     useEffect(() => {
         setMuted(true)
     }, [])
 
+    useEffect(() => {
+        getRecommendations().then(recommendations => {
+            setFeaturedVideos(recommendations)
+        })
+    }, [])
+
     return (
         <>
-            <Grid container>
-                <Grid item xs={9}>
+            <Container maxWidth="md">
                     <AsciiPlayer
                         ytURL={`https://www.youtube.com/watch?v=${searchParams.get('v')}`}
                         image={image}
@@ -98,19 +90,15 @@ function Watch() {
                         isMobile={isMobile}
                     />
                     {
-                        playerContent !== "" &&
-                            <div className='download-btn-wrap'>
-                                <DownloadButton
-                                    downloading={downloading}
-                                    onClick={downloadImage}
-                                />
-                            </div>
+                        playerContent &&
+                            <Box className={classes.downloadContainer}>
+                                <Button variant="outlined" disabled={downloading} onClick={downloadImage}>
+                                    { downloading ? 'Downloading...' : 'Download image'}
+                                </Button>
+                            </Box>
                     }
-                </Grid>
-                <Grid item xs={3}>
-                    video list
-                </Grid>
-            </Grid>
+            </Container>
+            <FeaturedVideos videos={featuredVideos} />
             {muted ? <Toast text={(isMobile ? "tap" : "click") + " to unmute"}/> : null}
         </>
     )
