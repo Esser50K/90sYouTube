@@ -142,7 +142,7 @@ function AsciiPlayer(props: AsciiPlayerProps) {
 
         // this is the character ratio of a base monospace font
         const characterRatio = 5 / 3
-        const windowPortion = 0.9
+        const windowPortion = 0.75
         const ratio = lineLength / nLines
         const heightLimited = (lineLength / window.innerWidth) < (nLines / window.innerHeight)
         const limiter = heightLimited ? window.innerHeight : window.innerWidth
