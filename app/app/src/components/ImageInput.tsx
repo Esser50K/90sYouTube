@@ -12,6 +12,7 @@ const useStyles = makeStyles((theme: Theme) =>
         convertBox: {
             margin: theme.spacing(2),
             flexShrink: 0,
+            height: '6em',
         },
         default: {
             border: `2px dashed ${theme.palette.secondary.main}`,
