@@ -57,7 +57,6 @@ function ImageInput(props: ImageInputProps) {
         e.preventDefault()
         e.stopPropagation()
         dragInCount++
-        console.log('dragin', dragInCount)
         if (e.dataTransfer?.items && e.dataTransfer.items.length > 0) {
             setWrongFileType(false)
             setFileIsHovering(true)
@@ -70,14 +69,13 @@ function ImageInput(props: ImageInputProps) {
         e.preventDefault()
         e.stopPropagation()
         dragInCount--
-        console.log('dragout', dragInCount)
         if (dragInCount > 0)
             return
 
         setFileIsHovering(false);
         setWrongFileType(false)
     }
-    const handleDrop = (e: DragEvent) => {
+    const handleDrop = async (e: DragEvent) => {
         e.preventDefault()
         e.stopPropagation()
 
