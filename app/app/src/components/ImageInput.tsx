@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import './ImageInput.css';
 import {Card, CardActionArea, createStyles, makeStyles, Theme, Typography} from "@material-ui/core";
 
@@ -37,6 +37,7 @@ function ImageInput(props: ImageInputProps) {
 
     let dragInCount = 0
     const supportedImageTypes = ["image/jpeg", "image/jpg", "image/png"]
+    const dropRef = React.useRef(null)
 
     const inputState = () => fileIsHovering ? wrongFileType ? 'error' : 'fileOver' : 'default'
     const inputText = (): string => {
@@ -47,14 +48,16 @@ function ImageInput(props: ImageInputProps) {
         }
     }
 
-    const handleDrag = (e: React.DragEvent<HTMLButtonElement>) => {
+    const handleDrag = (e: DragEvent) => {
         e.preventDefault()
         e.stopPropagation()
+        console.log('drag', dragInCount)
     }
-    const handleDragIn = (e: React.DragEvent<HTMLButtonElement>) => {
+    const handleDragIn = (e: DragEvent) => {
         e.preventDefault()
         e.stopPropagation()
         dragInCount++
+        console.log('dragin', dragInCount)
         if (e.dataTransfer?.items && e.dataTransfer.items.length > 0) {
             setWrongFileType(false)
             setFileIsHovering(true)
@@ -63,17 +66,18 @@ function ImageInput(props: ImageInputProps) {
             }
         }
     }
-    const handleDragOut = (e: React.DragEvent<HTMLButtonElement>) => {
+    const handleDragOut = (e: DragEvent) => {
         e.preventDefault()
         e.stopPropagation()
         dragInCount--
+        console.log('dragout', dragInCount)
         if (dragInCount > 0)
             return
 
         setFileIsHovering(false);
         setWrongFileType(false)
     }
-    const handleDrop = async (e: React.DragEvent<HTMLButtonElement>) => {
+    const handleDrop = (e: DragEvent) => {
         e.preventDefault()
         e.stopPropagation()
 
@@ -102,26 +106,45 @@ function ImageInput(props: ImageInputProps) {
         props.onImageSubmit(f);
     }
 
+    useEffect(() => {
+        if (dropRef.current === null) {
+            return
+        }
+
+        const div = dropRef.current! as HTMLDivElement
+        div.addEventListener('dragenter', handleDragIn)
+        div.addEventListener('dragleave', handleDragOut)
+        div.addEventListener('dragover', handleDrag)
+        div.addEventListener('drop', handleDrop)
+
+        return () => {
+            div.removeEventListener('dragenter', handleDragIn)
+            div.removeEventListener('dragleave', handleDragOut)
+            div.removeEventListener('dragover', handleDrag)
+            div.removeEventListener('drop', handleDrop)
+        }
+    }, [])
+
     return (
+        <div ref={dropRef}>
         <Card variant="outlined" className={`${classes.convertBox} ${classes[inputState()]}`}>
-            <CardActionArea className={classes.convertBoxActionArea}
-                            onClick={() => document.getElementById("file-input")?.click()}
-                            onDragEnter={handleDragIn}
-                            onDragLeave={handleDragOut}
-                            onDragOver={handleDrag}
-                            onDrop={handleDrop}
-            >
-                <input type="file"
-                       accept="image/png, image/jpeg"
-                       id="file-input"
-                       style={{ "display": "none" }}
-                       onChange={handleSelectImage}>
-                </input>
-                <Typography variant="body2">
-                    {inputText()}
-                </Typography>
-            </CardActionArea>
+
+                <CardActionArea className={classes.convertBoxActionArea}
+                                onClick={() => document.getElementById("file-input")?.click()}
+                >
+                    <input type="file"
+                           accept="image/png, image/jpeg"
+                           id="file-input"
+                           style={{ "display": "none" }}
+                           onChange={handleSelectImage}>
+                    </input>
+                    <Typography variant="body2">
+                        {inputText()}
+                    </Typography>
+                </CardActionArea>
         </Card>
+        </div>
+
     );
 }
 
