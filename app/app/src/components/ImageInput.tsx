@@ -12,7 +12,16 @@ const useStyles = makeStyles((theme: Theme) =>
         convertBox: {
             margin: theme.spacing(2),
             flexShrink: 0,
+        },
+        default: {
             border: `2px dashed ${theme.palette.secondary.main}`,
+        },
+        fileOver: {
+            border: `2px dashed ${theme.palette.primary.main}`,
+        },
+        error: {
+            border: `2px solid ${theme.palette.error.main}`,
+            color: theme.palette.error.main,
         },
         convertBoxActionArea: {
             padding: theme.spacing(2),
@@ -27,6 +36,16 @@ function ImageInput(props: ImageInputProps) {
 
     let dragInCount = 0
     const supportedImageTypes = ["image/jpeg", "image/jpg", "image/png"]
+
+    const inputState = () => fileIsHovering ? wrongFileType ? 'error' : 'fileOver' : 'default'
+    const inputText = (): string => {
+        switch (inputState()) {
+            case 'default': return 'Click to select or drag an image on this box to asciify it';
+            case 'fileOver': return 'Drop the image now';
+            case 'error': return 'Unsupported file type';
+        }
+    }
+
     const handleDrag = (e: React.DragEvent<HTMLButtonElement>) => {
         e.preventDefault()
         e.stopPropagation()
@@ -83,7 +102,7 @@ function ImageInput(props: ImageInputProps) {
     }
 
     return (
-        <Card variant="outlined" className={classes.convertBox}>
+        <Card variant="outlined" className={`${classes.convertBox} ${classes[inputState()]}`}>
             <CardActionArea className={classes.convertBoxActionArea}
                             onClick={() => document.getElementById("file-input")?.click()}
                             onDragEnter={handleDragIn}
@@ -98,9 +117,7 @@ function ImageInput(props: ImageInputProps) {
                        onChange={handleSelectImage}>
                 </input>
                 <Typography variant="body2">
-                    {fileIsHovering ?
-                        wrongFileType ? "Unsupported file type" : "Drop the image now"
-                        : "Click to select or drag an image on this box to asciify it"}
+                    {inputText()}
                 </Typography>
             </CardActionArea>
         </Card>
