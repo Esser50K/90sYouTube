@@ -11,7 +11,7 @@ import {getUrl} from "../utils"
 import FeaturedVideos from "../components/FeaturedVideos";
 import {getRecommendations} from "../services/recommendations";
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles(() =>
     createStyles({
         downloadContainer: {
             display: 'grid',
@@ -101,23 +101,23 @@ function Watch() {
     return (
         <>
             <Container maxWidth="md">
-                    <AsciiPlayer
-                        ytURL={getYTUrl()}
-                        image={image}
-                        show={true}
-                        onRepaint={setPlayerContent}
-                        isMobile={isMobile}
-                    />
-                    {
-                        playerContent &&
-                            <Box className={classes.downloadContainer}>
-                                <Button variant="outlined" disabled={downloading} onClick={downloadImage}>
-                                    { downloading ? 'Downloading...' : 'Download image'}
-                                </Button>
-                            </Box>
-                    }
+                <AsciiPlayer
+                    ytURL={getYTUrl()}
+                    image={image}
+                    show={true}
+                    onRepaint={setPlayerContent}
+                    isMobile={isMobile}
+                />
+                {
+                    playerContent &&
+                    <Box className={classes.downloadContainer}>
+                        <Button variant="outlined" disabled={downloading} onClick={downloadImage}>
+                            {downloading ? 'Downloading...' : 'Download image'}
+                        </Button>
+                    </Box>
+                }
             </Container>
-            <FeaturedVideos videos={featuredVideos} />
+            <FeaturedVideos videos={featuredVideos}/>
             {muted ? <Toast text={(isMobile ? "tap" : "click") + " to unmute"}/> : null}
         </>
     )
