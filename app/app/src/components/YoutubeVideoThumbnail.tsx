@@ -9,6 +9,9 @@ const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         card: {
             height: '100%',
+            border: 'none',
+            background: 'transparent',
+            color: 'transparent'
         },
         actionArea: {
             display: 'grid',
@@ -19,6 +22,10 @@ const useStyles = makeStyles((theme: Theme) =>
         },
         thumbnail: {
             backgroundSize: "cover",
+            transition: "transform 0.15s ease-in-out",
+            '&:hover': {
+                transform: 'translateY(-5px)',
+            },
             '&::before': {
                 content: "''",
                 display: "inline-block",
@@ -26,7 +33,12 @@ const useStyles = makeStyles((theme: Theme) =>
                 height: 0,
                 paddingBottom: "calc(100% / (16/9))",
             },
-            marginBottom: theme.spacing(1.5),
+            marginBottom: theme.spacing(2.5),
+            boxShadow: `2px 2px 0px ${theme.palette.secondary.dark},
+                        4px 4px 0px ${theme.palette.secondary.dark},
+                        6px 6px 0px ${theme.palette.secondary.dark},
+                        8px 8px 0px ${theme.palette.secondary.dark},
+                        10px 10px 0px ${theme.palette.secondary.dark}`,
             borderTopRightRadius: theme.videoThumbnail.borderTopRightRadius,
             borderBottomRightRadius: theme.videoThumbnail.borderBottomRightRadius,
             borderBottomLeftRadius: theme.videoThumbnail.borderBottomLeftRadius,

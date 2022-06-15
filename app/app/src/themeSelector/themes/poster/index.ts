@@ -36,33 +36,6 @@ export const lightTheme: ThemeOptions = {
     search: {
         border: 'none',
     },
-    shadows: [
-        'none',
-        '3px 3px 0 0 #474237',
-        '3px 3px 0 0 #474237',
-        '4px 4px 0 0 #474237',
-        '4px 4px 0 0 #474237',
-        '5px 5px 0 0 #474237',
-        '5px 5px 0 0 #474237',
-        '6px 6px 0 0 #474237',
-        '6px 6px 0 0 #474237',
-        '6px 6px 0 0 #474237',
-        '7px 7px 0 0 #474237',
-        '8px 8px 0 0 #474237',
-        '9px 9px 0 0 #474237',
-        '10px 10px 0 0 #474237',
-        '11px 11px 0 0 #474237',
-        '12px 12px 0 0 #474237',
-        '13px 13px 0 0 #474237',
-        '14px 14px 0 0 #474237',
-        '15px 15px 0 0 #474237',
-        '16px 16px 0 0 #474237',
-        '17px 17px 0 0 #474237',
-        '18px 18px 0 0 #474237',
-        '19px 19px 0 0 #474237',
-        '20px 20px 0 0 #474237',
-        '21px 21px 0 0 #474237',
-    ],
     breakpoints: {
         values: {
             xs: 0,
@@ -79,6 +52,19 @@ export const lightTheme: ThemeOptions = {
             },
         },
     },
+    props: {
+        MuiAppBar: {
+            color: 'inherit',
+        },
+        MuiPaper: {
+            variant: 'outlined',
+        },
+        MuiButton: {
+            disableElevation: true,
+            variant: 'outlined',
+        },
+    },
+
 }
 
 export const darkTheme: ThemeOptions = {

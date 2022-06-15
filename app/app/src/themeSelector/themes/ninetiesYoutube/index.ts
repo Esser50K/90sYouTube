@@ -10,6 +10,7 @@ export const lightTheme: ThemeOptions = {
         },
         secondary: {
             main: '#f8f8f8',
+            dark: '#1d1d1d',
         },
         background: {
             default: '#f9f9f9',
@@ -39,6 +40,14 @@ export const lightTheme: ThemeOptions = {
         //         padding: '0 30px',
         //     },
         // },
+        MuiButton: {
+            colorInherit: {
+                backgroundColor: 'transparent',
+                '&:hover': {
+                    backgroundColor: 'transparent',
+                }
+            }
+        },
         MuiAppBar: {
             colorInherit: {
                 backgroundColor: '#ffffff',
@@ -74,6 +83,9 @@ export const lightTheme: ThemeOptions = {
         MuiButton: {
             disableElevation: true,
             variant: 'outlined',
+            disableRipple: true,
+            disableFocusRipple: true,
+            disableTouchRipple: true,
         },
     },
 }
