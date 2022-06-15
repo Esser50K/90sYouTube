@@ -74,7 +74,7 @@ function AsciiPlayer(props: AsciiPlayerProps) {
         const videoId = ytUrl.split("v=")[1]
         const ytPlayer = initYTPlayer(videoId)
         const ws = new WebSocket(getUrl().replace(window.location.protocol + "//", (isHttps() ? "wss://" : "ws://")) + "/vid")
-        //const ws = new WebSocket("wss://www.asciifly.com/vid")
+        //const ws = new WebSocket("wss://www.90syoutube.com/vid")
         var firstFrame = false
         ws.onopen = () => {
             ws.send(JSON.stringify({ url: ytUrl, width: window.innerWidth / 6 }))

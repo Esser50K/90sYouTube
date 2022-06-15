@@ -15,7 +15,7 @@ MIN_IMG_WIDTH = 150
 MAX_IMG_WIDTH = 600
 MIN_VIDEO_WIDTH = 120
 MAX_VIDEO_WIDTH = 300
-WATERMARK = "made with asciifly.com"
+WATERMARK = "made with 90syoutube.com"
 tracer = trace.get_tracer(__name__)
 
 
@@ -72,7 +72,7 @@ def _gen_html(ascii_img: str, scale_factor: int) -> str:
 </pre>
 <div style="position:fixed; bottom: 0; right: 0;background-color: #fff; font-size:1vw; padding: 5px; border: solid #282c34 5px">
 <pre style="margin:0px">
-made with asciifly.com
+made with 90syoutube.com
 </pre>
 </div>
 </body>

@@ -17,7 +17,7 @@ COPY app /app
 WORKDIR /app
 RUN cython -3 encoder.pyx
 
-ENV OTEL_RESOURCE_ATTRIBUTES=service.name=asciifly
+ENV OTEL_RESOURCE_ATTRIBUTES=service.name=asciifier
 ENV OTEL_METRICS_EXPORTER=none
 ENV OTEL_EXPORTER_OTLP_ENDPOINT="http://144.126.140.147:4317"
 
