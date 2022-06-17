@@ -1,21 +1,57 @@
-import { useState, useEffect, useRef } from 'react';
+import React, {useEffect, useState} from 'react';
 import './ImageInput.css';
+import {Card, CardActionArea, createStyles, makeStyles, Theme, Typography} from "@material-ui/core";
 
 
 interface ImageInputProps {
     onImageSubmit: (e: File) => void
 }
 
+const useStyles = makeStyles((theme: Theme) =>
+    createStyles({
+        convertBox: {
+            margin: theme.spacing(2),
+            flexShrink: 0,
+            height: '6em',
+        },
+        default: {
+            border: `2px dashed ${theme.palette.secondary.main}`,
+        },
+        fileOver: {
+            border: `2px dashed ${theme.palette.primary.main}`,
+        },
+        error: {
+            border: `2px solid ${theme.palette.error.main}`,
+            color: theme.palette.error.main,
+        },
+        convertBoxActionArea: {
+            padding: theme.spacing(2),
+        },
+    }),
+);
+
 function ImageInput(props: ImageInputProps) {
-    const imgInput = useRef(null)
     const [fileIsHovering, setFileIsHovering] = useState(false)
     const [wrongFileType, setWrongFileType] = useState(false)
+    const classes = useStyles();
 
     let dragInCount = 0
     const supportedImageTypes = ["image/jpeg", "image/jpg", "image/png"]
+    const dropRef = React.useRef(null)
+
+    const inputState = () => fileIsHovering ? wrongFileType ? 'error' : 'fileOver' : 'default'
+    const inputText = (): string => {
+        switch (inputState()) {
+            case 'default': return 'Click to select or drag an image on this box to asciify it';
+            case 'fileOver': return 'Drop the image now';
+            case 'error': return 'Unsupported file type';
+        }
+    }
+
     const handleDrag = (e: DragEvent) => {
         e.preventDefault()
         e.stopPropagation()
+        console.log('drag', dragInCount)
     }
     const handleDragIn = (e: DragEvent) => {
         e.preventDefault()
@@ -69,11 +105,11 @@ function ImageInput(props: ImageInputProps) {
     }
 
     useEffect(() => {
-        if (imgInput.current === null) {
+        if (dropRef.current === null) {
             return
         }
 
-        const div = imgInput.current! as HTMLDivElement
+        const div = dropRef.current! as HTMLDivElement
         div.addEventListener('dragenter', handleDragIn)
         div.addEventListener('dragleave', handleDragOut)
         div.addEventListener('dragover', handleDrag)
@@ -88,27 +124,25 @@ function ImageInput(props: ImageInputProps) {
     }, [])
 
     return (
-        <div className="img-input-container">
-            <div ref={imgInput}
-                className={"img-input-box " +
-                    (fileIsHovering ?
-                        wrongFileType ? "img-input-with-wrong-file" : "img-input-with-file"
-                        : "img-input-without-file")}
-                style={{ cursor: 'pointer' }}
-                onClick={() => document.getElementById("file-input")?.click()}>
-                <input type="file"
-                    accept="image/png, image/jpeg"
-                    id="file-input"
-                    style={{ "display": "none" }}
-                    onChange={handleSelectImage}>
-                </input>
-                <div className="img-input-text">
-                    {fileIsHovering ?
-                        wrongFileType ? "Unsupported file type" : "Drop the image now"
-                        : "Click to select or drag an image on this box to asciify it"}
-                </div>
-            </div>
+        <div ref={dropRef}>
+        <Card variant="outlined" className={`${classes.convertBox} ${classes[inputState()]}`}>
+
+                <CardActionArea className={classes.convertBoxActionArea}
+                                onClick={() => document.getElementById("file-input")?.click()}
+                >
+                    <input type="file"
+                           accept="image/png, image/jpeg"
+                           id="file-input"
+                           style={{ "display": "none" }}
+                           onChange={handleSelectImage}>
+                    </input>
+                    <Typography variant="body2">
+                        {inputText()}
+                    </Typography>
+                </CardActionArea>
+        </Card>
         </div>
+
     );
 }
 

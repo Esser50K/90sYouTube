@@ -11,7 +11,7 @@ import {getUrl} from "../utils"
 import FeaturedVideos from "../components/FeaturedVideos";
 import {getRecommendations} from "../services/recommendations";
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles(() =>
     createStyles({
         downloadContainer: {
             display: 'grid',
@@ -69,8 +69,27 @@ function Watch() {
         window.URL.revokeObjectURL(url);
     }
 
+    const handleSubmitImage = (e: any) => {
+        console.info(e)
+        setImage(e)
+        setPlayerContent(e.img)
+    }
+
+    const getParams = (param: string) => {
+        return searchParams.get(param) || ''
+    }
+
+    const getYTUrl = () => {
+        return getParams('v') ? `https://www.youtube.com/watch?v=${getParams('v')}` : ''
+    }
+
     useEffect(() => {
         setMuted(true)
+        const i = JSON.parse(localStorage.getItem('converted-image') || '""')
+        if (i !== '""') {
+            handleSubmitImage(i)
+        }
+        localStorage.setItem('converted-image', '')
     }, [])
 
     useEffect(() => {
@@ -82,23 +101,23 @@ function Watch() {
     return (
         <>
             <Container maxWidth="md">
-                    <AsciiPlayer
-                        ytURL={`https://www.youtube.com/watch?v=${searchParams.get('v')}`}
-                        image={image}
-                        show={true}
-                        onRepaint={setPlayerContent}
-                        isMobile={isMobile}
-                    />
-                    {
-                        playerContent &&
-                            <Box className={classes.downloadContainer}>
-                                <Button variant="outlined" disabled={downloading} onClick={downloadImage}>
-                                    { downloading ? 'Downloading...' : 'Download image'}
-                                </Button>
-                            </Box>
-                    }
+                <AsciiPlayer
+                    ytURL={getYTUrl()}
+                    image={image}
+                    show={true}
+                    onRepaint={setPlayerContent}
+                    isMobile={isMobile}
+                />
+                {
+                    playerContent &&
+                    <Box className={classes.downloadContainer}>
+                        <Button variant="outlined" disabled={downloading} onClick={downloadImage}>
+                            {downloading ? 'Downloading...' : 'Download image'}
+                        </Button>
+                    </Box>
+                }
             </Container>
-            <FeaturedVideos videos={featuredVideos} />
+            <FeaturedVideos videos={featuredVideos}/>
             {muted ? <Toast text={(isMobile ? "tap" : "click") + " to unmute"}/> : null}
         </>
     )

@@ -17,6 +17,8 @@ import useMediaQuery from "@material-ui/core/useMediaQuery";
 import {CustomThemeContext} from "../themeSelector/CustomThemeProvider";
 import {themes} from "../themeSelector";
 import PlayArrowOutlined from "@material-ui/icons/PlayArrowOutlined";
+import ImageInput from "../components/ImageInput";
+import {getUrl} from "../utils";
 
 const drawerWidth = 240;
 
@@ -108,7 +110,6 @@ const useStyles = makeStyles((theme: Theme) =>
             paddingTop: theme.spacing(2.5),
         },
         themesHeading: {
-            margin: theme.spacing(2),
             textAlign: 'center',
         },
         infoBoxesAndDonation: {
@@ -164,6 +165,31 @@ function Layout({drawerCollapsed = false}) {
 
     const navigateToHome = () => navigate('/');
 
+    const handleSubmitImage = async (e: File) => {
+        const arrBuffer = await e.arrayBuffer()
+
+        if (arrBuffer === undefined) {
+            return
+        }
+
+        const base64String = window.btoa(new Uint8Array(arrBuffer).reduce(function (data, byte) {
+            return data + String.fromCharCode(byte);
+        }, ''));
+        const resp = await fetch(getUrl() + "/img", {
+            method: "POST",
+            body: JSON.stringify({img: base64String, width: window.innerWidth / 4})
+        })
+        if (resp.status !== 200) {
+            console.error("error uploading image:", await resp.text())
+            alert("error processing image")
+            // setShowPlayer(false)
+        }
+
+        const decoded = await resp.json()
+        localStorage.setItem('converted-image', JSON.stringify(decoded))
+        navigate('watch')
+    }
+
     const onYTUrlSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         e.stopPropagation()
@@ -186,7 +212,13 @@ function Layout({drawerCollapsed = false}) {
             <Paper variant="outlined" className={classes.introBox}>
                 <Typography variant="body2">Paste a YouTube video link to ASCIIfy it on the fly!</Typography>
             </Paper>
-            <Typography variant="h6" className={classes.themesHeading}>Available themes</Typography>
+            <Container>
+                <Typography variant="subtitle1">- or -</Typography>
+            </Container>
+            <ImageInput
+                onImageSubmit={handleSubmitImage}
+            />
+            <Typography variant="h6" className={classes.themesHeading}>Select theme</Typography>
             <ButtonGroup
                 orientation="vertical"
                 color="primary"
