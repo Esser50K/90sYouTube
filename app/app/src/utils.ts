@@ -20,6 +20,7 @@ export const gen3DBoxShadowStyle = (nLayers: number, theme: Theme) => {
     }
 
     return {
+        borderRadius: theme.shape.borderRadius+1,
         border: `1px solid ${theme.palette.primary.light}`,
         boxShadow: boxShadow.substring(0, boxShadow.length-1)
     }
