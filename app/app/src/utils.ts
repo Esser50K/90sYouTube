@@ -13,15 +13,16 @@ export const getUrl = (endpoint: string = "") => {
     return window.location.protocol + "//" + window.location.host
 }
 
-export const gen3DBoxShadowStyle = (nLayers: number, theme: Theme) => {
+export const gen3DBoxShadowStyle = (nLayers: number, theme: Theme, secondary = false) => {
+    const color = secondary ? theme.palette.secondary.dark : theme.palette.primary.light
     let boxShadow = ""
     for (let i = 1; i < nLayers+1; i++) {
-        boxShadow += `${i*2}px ${i*2}px 0px ${theme.palette.primary.light},`
+        boxShadow += `${i*2}px ${i*2}px 0px ${color},`
     }
 
     return {
         borderRadius: theme.shape.borderRadius+1,
-        border: `1px solid ${theme.palette.primary.light}`,
+        border: `1px solid ${color}`,
         boxShadow: boxShadow.substring(0, boxShadow.length-1)
     }
 }

@@ -75,12 +75,11 @@ const useStyles = makeStyles((theme: Theme) =>
                 marginLeft: theme.spacing(3),
                 width: 'auto',
             },
-            // border: theme.search.border,
-            ...gen3DBoxShadowStyle(2, theme),
         },
         inputRoot: {
             color: theme.palette.text.primary,
             background: theme.palette.background.paper,
+            ...gen3DBoxShadowStyle(2, theme),
             borderRadius: theme.shape.borderRadius,
         },
         inputInput: {
@@ -150,7 +149,8 @@ const useStyles = makeStyles((theme: Theme) =>
             borderTop: `1px solid ${theme.palette.secondary.dark}`,
         },
         convertButton: {
-            margin: theme.spacing(0, 0, 0, 0.5),
+            ...gen3DBoxShadowStyle(2, theme, true),
+            margin: theme.spacing(0, 0, 0, 1.5),
             height: '48px',
             width: '40px',
         },
