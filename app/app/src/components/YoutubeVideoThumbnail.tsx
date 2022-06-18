@@ -4,6 +4,7 @@ import Avatar from "@material-ui/core/Avatar";
 import Typography from "@material-ui/core/Typography";
 import {useNavigate} from "react-router-dom";
 import YoutubeVideoThumbnailProps from "../types/YoutubeVideoThumbnail";
+import { gen3DBoxShadowStyle } from "../utils";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -34,15 +35,11 @@ const useStyles = makeStyles((theme: Theme) =>
                 paddingBottom: "calc(100% / (16/9))",
             },
             marginBottom: theme.spacing(2.5),
-            boxShadow: `2px 2px 0px ${theme.palette.secondary.dark},
-                        4px 4px 0px ${theme.palette.secondary.dark},
-                        6px 6px 0px ${theme.palette.secondary.dark},
-                        8px 8px 0px ${theme.palette.secondary.dark},
-                        10px 10px 0px ${theme.palette.secondary.dark}`,
             borderTopRightRadius: theme.videoThumbnail.borderTopRightRadius,
             borderBottomRightRadius: theme.videoThumbnail.borderBottomRightRadius,
             borderBottomLeftRadius: theme.videoThumbnail.borderBottomLeftRadius,
             borderTopLeftRadius: theme.videoThumbnail.borderTopLeftRadius,
+            ...gen3DBoxShadowStyle(5, theme),
         },
         videoMetadata: {
             display: 'grid',

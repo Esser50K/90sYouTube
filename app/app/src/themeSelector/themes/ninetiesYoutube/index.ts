@@ -7,10 +7,11 @@ export const lightTheme: ThemeOptions = {
         type: 'light',
         primary: {
             main: '#000000',
+            light: '#1d1d1d',
         },
         secondary: {
             main: '#f8f8f8',
-            dark: '#1d1d1d',
+            dark: '#e4e4e4',
         },
         background: {
             default: '#f9f9f9',
