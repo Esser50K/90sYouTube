@@ -111,6 +111,9 @@ export const lightTheme: ThemeOptions = {
         MuiButton: {
             disableElevation: true,
             variant: 'outlined',
+            disableRipple: true,
+            disableFocusRipple: true,
+            disableTouchRipple: true,
         },
     },
 
@@ -209,6 +212,13 @@ export const darkTheme: ThemeOptions = {
     props: {
         MuiPaper: {
             variant: 'outlined',
+        },
+        MuiButton: {
+            disableElevation: true,
+            variant: 'outlined',
+            disableRipple: true,
+            disableFocusRipple: true,
+            disableTouchRipple: true,
         },
     },
 }
