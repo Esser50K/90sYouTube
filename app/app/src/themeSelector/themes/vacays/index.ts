@@ -1,14 +1,19 @@
 import 'typeface-lato';
 import logo from './logo.png'
 import {ThemeOptions} from "@material-ui/core";
+import { gen3DBoxShadow } from '../../../utils';
 
-const thumbnailBorderRadius = 12
+const shapeBorderRadius = 16;
+const thumbnailBorderRadius = 12;
+const lightThemePrimaryMain = "#F27D59";
+const lightThemePrimaryLight = "#F4977A";
 
 export const lightTheme: ThemeOptions = {
     palette: {
         type: 'light',
         primary: {
-            main: '#F27D59',
+            main: lightThemePrimaryMain,
+            light: lightThemePrimaryLight
         },
         secondary: {
             main: '#FCDA95',
@@ -23,12 +28,12 @@ export const lightTheme: ThemeOptions = {
         fontSize: 12,
     },
     shape: {
-        borderRadius: 16,
+        borderRadius: shapeBorderRadius,
     },
     videoThumbnail: {
         borderTopRightRadius: thumbnailBorderRadius,
         borderBottomRightRadius: thumbnailBorderRadius,
-        borderBottomLeftRadius: 0,
+        borderBottomLeftRadius: thumbnailBorderRadius,
         borderTopLeftRadius: thumbnailBorderRadius,
     },
     logo: {
@@ -46,6 +51,18 @@ export const lightTheme: ThemeOptions = {
             xl: 2280,
         },
     },
+    overrides: {
+        MuiInputBase: {
+            root: {
+                borderTopLeftRadius: shapeBorderRadius+1,
+                borderTopRightRadius: shapeBorderRadius+1,
+                borderBottomLeftRadius: shapeBorderRadius+1,
+                borderBottomRightRadius: shapeBorderRadius+1,
+                border: `1px solid ${lightThemePrimaryLight}`,
+                boxShadow: gen3DBoxShadow(2, lightThemePrimaryLight)
+            }
+        }
+    },
     props: {
         MuiPaper: {
             variant: 'outlined',
@@ -53,11 +70,15 @@ export const lightTheme: ThemeOptions = {
     },
 }
 
+const darkThemePrimaryMain = "#F27D59";
+const darkThemePrimaryLight = "#F4977A";
+
 export const darkTheme: ThemeOptions = {
     palette: {
         type: 'dark',
         primary: {
-            main: '#F27D59',
+            main: darkThemePrimaryMain,
+            light: darkThemePrimaryLight
         },
         secondary: {
             main: '#FCDA95',
@@ -72,12 +93,12 @@ export const darkTheme: ThemeOptions = {
         fontSize: 12,
     },
     shape: {
-        borderRadius: 16,
+        borderRadius: shapeBorderRadius,
     },
     videoThumbnail: {
         borderTopRightRadius: thumbnailBorderRadius,
         borderBottomRightRadius: thumbnailBorderRadius,
-        borderBottomLeftRadius: 0,
+        borderBottomLeftRadius: thumbnailBorderRadius,
         borderTopLeftRadius: thumbnailBorderRadius,
     },
     logo: {
@@ -94,6 +115,18 @@ export const darkTheme: ThemeOptions = {
             lg: 1280,
             xl: 2280,
         },
+    },
+    overrides: {
+        MuiInputBase: {
+            root: {
+                borderTopLeftRadius: shapeBorderRadius+1,
+                borderTopRightRadius: shapeBorderRadius+1,
+                borderBottomLeftRadius: shapeBorderRadius+1,
+                borderBottomRightRadius: shapeBorderRadius+1,
+                border: `1px solid ${darkThemePrimaryLight}`,
+                boxShadow: gen3DBoxShadow(2, darkThemePrimaryLight)
+            }
+        }
     },
     props: {
         MuiPaper: {

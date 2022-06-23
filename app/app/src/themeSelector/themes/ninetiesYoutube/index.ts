@@ -1,13 +1,18 @@
 // @ts-nocheck -- mismatch between type definition and specs - MuiAppBar is missing the colorInherit property
 import logo from './logo.png'
 import {ThemeOptions} from "@material-ui/core";
+import { gen3DBoxShadow } from '../../../utils';
+
+const shapeBorderRadius = 0;
+const primaryMain = "#000"
+const primaryLight = "#1d1d1d"
 
 export const lightTheme: ThemeOptions = {
     palette: {
         type: 'light',
         primary: {
-            main: '#000000',
-            light: '#1d1d1d',
+            main: primaryMain,
+            light: primaryLight,
         },
         secondary: {
             main: '#f8f8f8',
@@ -55,9 +60,19 @@ export const lightTheme: ThemeOptions = {
                 color: '#000000',
             },
         },
+        MuiInputBase: {
+            root: {
+                borderTopLeftRadius: shapeBorderRadius+1,
+                borderTopRightRadius: shapeBorderRadius+1,
+                borderBottomLeftRadius: shapeBorderRadius+1,
+                borderBottomRightRadius: shapeBorderRadius+1,
+                border: `1px solid ${primaryLight}`,
+                boxShadow: gen3DBoxShadow(2, primaryLight)
+            }
+        }
     },
     shape: {
-        borderRadius: 0,
+        borderRadius: shapeBorderRadius,
     },
     logo: {
         src: logo,
@@ -65,6 +80,33 @@ export const lightTheme: ThemeOptions = {
     search: {
         border: '1px solid #cccccc',
     },
+    shadows: [
+        'none',
+        gen3DBoxShadow(1, primaryMain),
+        gen3DBoxShadow(1, primaryMain),
+        gen3DBoxShadow(1, primaryMain),
+        gen3DBoxShadow(1, primaryMain),
+        gen3DBoxShadow(2, primaryMain),
+        gen3DBoxShadow(2, primaryMain),
+        gen3DBoxShadow(2, primaryMain),
+        gen3DBoxShadow(2, primaryMain),
+        gen3DBoxShadow(3, primaryMain),
+        gen3DBoxShadow(3, primaryMain),
+        gen3DBoxShadow(4, primaryMain),
+        gen3DBoxShadow(4, primaryMain),
+        gen3DBoxShadow(5, primaryMain),
+        gen3DBoxShadow(5, primaryMain),
+        gen3DBoxShadow(6, primaryMain),
+        gen3DBoxShadow(6, primaryMain),
+        gen3DBoxShadow(7, primaryMain),
+        gen3DBoxShadow(8, primaryMain),
+        gen3DBoxShadow(9, primaryMain),
+        gen3DBoxShadow(10, primaryMain),
+        gen3DBoxShadow(11, primaryMain),
+        gen3DBoxShadow(12, primaryMain),
+        gen3DBoxShadow(12, primaryMain),
+        gen3DBoxShadow(14, primaryMain),
+    ],
     breakpoints: {
         values: {
             xs: 0,

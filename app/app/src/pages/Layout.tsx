@@ -19,6 +19,7 @@ import {themes} from "../themeSelector";
 import PlayArrowOutlined from "@material-ui/icons/PlayArrowOutlined";
 import ImageInput from "../components/ImageInput";
 import {getUrl, gen3DBoxShadowStyle} from "../utils";
+import ElevatedButton from "../components/ElevatedButton";
 
 const drawerWidth = 240;
 
@@ -79,7 +80,6 @@ const useStyles = makeStyles((theme: Theme) =>
         inputRoot: {
             color: theme.palette.text.primary,
             background: theme.palette.background.paper,
-            ...gen3DBoxShadowStyle(2, theme),
             borderRadius: theme.shape.borderRadius,
         },
         inputInput: {
@@ -107,6 +107,8 @@ const useStyles = makeStyles((theme: Theme) =>
             }
         },
         drawerPaper: {
+            backgroundColor: theme.palette.background.paper,
+            color: theme.palette.background.default,
             width: drawerWidth,
             paddingTop: theme.spacing(2.5),
             border: "none",
@@ -149,7 +151,6 @@ const useStyles = makeStyles((theme: Theme) =>
             borderTop: `1px solid ${theme.palette.secondary.dark}`,
         },
         convertButton: {
-            ...gen3DBoxShadowStyle(2, theme, true),
             margin: theme.spacing(0, 0, 0, 1.5),
             height: '48px',
             width: '40px',
@@ -268,9 +269,9 @@ function Layout({drawerCollapsed = false}) {
                                     onChange={onYTUrlChange}
                                     value={inputUrl}
                                 />
-                                <Button className={classes.convertButton} variant="contained" size="small" color="secondary" aria-label="convert from url" type="submit">
+                                <ElevatedButton variant="contained" size="small" color="secondary" aria-label="convert from url" type="submit">
                                     <PlayArrowOutlined fontSize="large"/>
-                                </Button>
+                                </ElevatedButton>
                             </form>
                         </div>
                     </Box>
