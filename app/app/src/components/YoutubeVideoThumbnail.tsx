@@ -25,7 +25,12 @@ const useStyles = makeStyles((theme: Theme) =>
             backgroundSize: "cover",
             transition: "transform 0.15s ease-in-out",
             '&:hover': {
-                transform: 'translateY(-5px)',
+                transform: 'translateY(-2px)',
+            },
+            '&:active': {
+                transition: "none",
+                transform: 'translate(2px, 0px)',
+                ...gen3DBoxShadowStyle(4, theme),
             },
             '&::before': {
                 content: "''",
