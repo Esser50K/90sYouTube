@@ -23,7 +23,6 @@ const useStyles = makeStyles((theme: Theme) =>
         },
         thumbnail: {
             backgroundSize: "cover",
-            transition: "transform 0.15s ease-in-out",
             '&:hover': {
                 transform: 'translateY(-2px)',
             },
@@ -31,6 +30,10 @@ const useStyles = makeStyles((theme: Theme) =>
                 transition: "none",
                 transform: 'translate(2px, 0px)',
                 ...gen3DBoxShadowStyle(4, theme),
+                borderTopRightRadius: theme.videoThumbnail.borderTopRightRadius,
+                borderBottomRightRadius: theme.videoThumbnail.borderBottomRightRadius,
+                borderBottomLeftRadius: theme.videoThumbnail.borderBottomLeftRadius,
+                borderTopLeftRadius: theme.videoThumbnail.borderTopLeftRadius,
             },
             '&::before': {
                 content: "''",
