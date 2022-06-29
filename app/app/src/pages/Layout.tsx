@@ -18,7 +18,8 @@ import {CustomThemeContext} from "../themeSelector/CustomThemeProvider";
 import {themes} from "../themeSelector";
 import PlayArrowOutlined from "@material-ui/icons/PlayArrowOutlined";
 import ImageInput from "../components/ImageInput";
-import {getUrl} from "../utils";
+import {getUrl, gen3DBoxShadowStyle} from "../utils";
+import ElevatedButton from "../components/ElevatedButton";
 
 const drawerWidth = 240;
 
@@ -36,6 +37,7 @@ const useStyles = makeStyles((theme: Theme) =>
         },
         appBar: {
             zIndex: theme.zIndex.drawer + 1,
+            border: "none",
         },
         logo: {
             height: '24px',
@@ -74,7 +76,6 @@ const useStyles = makeStyles((theme: Theme) =>
                 marginLeft: theme.spacing(3),
                 width: 'auto',
             },
-            border: theme.search.border,
         },
         inputRoot: {
             color: theme.palette.text.primary,
@@ -106,8 +107,12 @@ const useStyles = makeStyles((theme: Theme) =>
             }
         },
         drawerPaper: {
+            // backgroundColor: theme.palette.background.paper,
+            // backgroundColor: theme.palette.primary.main,
+            // color: theme.palette.background.default,
             width: drawerWidth,
             paddingTop: theme.spacing(2.5),
+            border: "none",
         },
         themesHeading: {
             textAlign: 'center',
@@ -121,6 +126,7 @@ const useStyles = makeStyles((theme: Theme) =>
         introBox: {
             margin: theme.spacing(2),
             padding: theme.spacing(2),
+            ...gen3DBoxShadowStyle(2, theme),
         },
         donateContainer: {
             marginTop: theme.spacing(4),
@@ -130,7 +136,7 @@ const useStyles = makeStyles((theme: Theme) =>
             justifyItems: 'center',
         },
         donateButton: {
-            margin: theme.spacing(2, 0, 2, 0)
+            margin: theme.spacing(2, 0, 2, 0),
         },
         content: {
             flexGrow: 1,
@@ -143,9 +149,10 @@ const useStyles = makeStyles((theme: Theme) =>
         },
         container: {
             padding: theme.spacing(4, 2, 4, 2),
+            borderTop: `1px solid ${theme.palette.secondary.dark}`,
         },
         convertButton: {
-            margin: theme.spacing(0, 0, 0, 0.5),
+            margin: theme.spacing(0, 0, 0, 1.5),
             height: '48px',
             width: '40px',
         },
@@ -221,13 +228,17 @@ function Layout({drawerCollapsed = false}) {
             <Typography variant="h6" className={classes.themesHeading}>Select theme</Typography>
             <ButtonGroup
                 orientation="vertical"
-                color="primary"
+                color="inherit"
                 aria-label="vertical contained primary button group"
                 variant="text"
             >
                 {
                     Object.entries(themes).map(theme => (
-                        <Button key={theme[0]} onClick={() => setTheme(theme[0])} disabled={theme[0] === currentTheme}>{ theme[0] }</Button>
+                        <Button key={theme[0]}
+                                onClick={() => setTheme(theme[0])}
+                                disabled={theme[0] === currentTheme}>
+                            { theme[0] }
+                        </Button>
                     ))
                 }
             </ButtonGroup>
@@ -251,9 +262,6 @@ function Layout({drawerCollapsed = false}) {
                         <img onClick={navigateToHome} src={theme.logo.src} className={classes.logo} alt="90s YouTube logo" />
                     </div>
                     <Box className={classes.videoUrl}>
-                        { isDesktop &&
-                            <Typography>YouTube video link:</Typography>
-                        }
                         <div className={classes.search}>
                             <form className={classes.form} onSubmit={onYTUrlSubmit}>
                                 <InputBase
@@ -266,15 +274,16 @@ function Layout({drawerCollapsed = false}) {
                                     onChange={onYTUrlChange}
                                     value={inputUrl}
                                 />
-                                <Button className={classes.convertButton} variant="contained" size="small" color="secondary" aria-label="convert from url" type="submit">
+                                <ElevatedButton variant="contained" size="small" color="secondary" aria-label="convert from url" type="submit">
                                     <PlayArrowOutlined fontSize="large"/>
-                                </Button>
+                                </ElevatedButton>
                             </form>
                         </div>
                     </Box>
                     <div className={classes.toolbarEnd}/>
                 </Toolbar>
             </AppBar>
+
             { isDesktopMd && <div className={classes.appBarSpacer}/> }
             { !drawerCollapsed &&
                 <>

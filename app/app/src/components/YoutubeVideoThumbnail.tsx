@@ -4,11 +4,15 @@ import Avatar from "@material-ui/core/Avatar";
 import Typography from "@material-ui/core/Typography";
 import {useNavigate} from "react-router-dom";
 import YoutubeVideoThumbnailProps from "../types/YoutubeVideoThumbnail";
+import { gen3DBoxShadowStyle } from "../utils";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         card: {
             height: '100%',
+            border: 'none',
+            background: 'transparent',
+            color: 'transparent'  // this also removes the shadow highlighting of the car when hovering
         },
         actionArea: {
             display: 'grid',
@@ -19,6 +23,18 @@ const useStyles = makeStyles((theme: Theme) =>
         },
         thumbnail: {
             backgroundSize: "cover",
+            '&:hover': {
+                transform: 'translateY(-2px)',
+            },
+            '&:active': {
+                transition: "none",
+                transform: 'translate(2px, 0px)',
+                ...gen3DBoxShadowStyle(4, theme),
+                borderTopRightRadius: theme.videoThumbnail.borderTopRightRadius,
+                borderBottomRightRadius: theme.videoThumbnail.borderBottomRightRadius,
+                borderBottomLeftRadius: theme.videoThumbnail.borderBottomLeftRadius,
+                borderTopLeftRadius: theme.videoThumbnail.borderTopLeftRadius,
+            },
             '&::before': {
                 content: "''",
                 display: "inline-block",
@@ -26,7 +42,8 @@ const useStyles = makeStyles((theme: Theme) =>
                 height: 0,
                 paddingBottom: "calc(100% / (16/9))",
             },
-            marginBottom: theme.spacing(1.5),
+            marginBottom: theme.spacing(2.5),
+            ...gen3DBoxShadowStyle(5, theme),
             borderTopRightRadius: theme.videoThumbnail.borderTopRightRadius,
             borderBottomRightRadius: theme.videoThumbnail.borderBottomRightRadius,
             borderBottomLeftRadius: theme.videoThumbnail.borderBottomLeftRadius,
@@ -47,6 +64,11 @@ const useStyles = makeStyles((theme: Theme) =>
         },
         title: {
             fontWeight: 600,
+            overflow: "hidden",
+            textOverflow: "ellipsis",
+            display: "-webkit-box",
+            "-webkit-line-clamp": 2,
+            "-webkit-box-orient": "vertical",
         },
         channelTitle: {
             marginTop: theme.spacing(0.5),

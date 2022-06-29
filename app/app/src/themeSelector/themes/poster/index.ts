@@ -1,20 +1,26 @@
 import 'typeface-open-sans';
 import logo from './logo.png'
 import {ThemeOptions} from "@material-ui/core";
+import { gen3DBoxShadow } from '../../../utils';
 
+const shapeBorderRadius = 9;
 const thumbnailBorderRadius = 6
+const lightThemePrimaryMain = "#3f51b5"
+const lightThemePrimaryLight = "#84B0B2"
 
 export const lightTheme: ThemeOptions = {
     palette: {
         type: 'light',
         primary: {
-            main: '#2CAAAA',
+            main: lightThemePrimaryMain,
+            light: lightThemePrimaryLight
         },
         secondary: {
             main: '#ED8796',
         },
         background: {
             default: '#ECF7F9',
+            paper: '#ECF7F9'
         },
     },
     typography: {
@@ -22,7 +28,7 @@ export const lightTheme: ThemeOptions = {
         fontSize: 12,
     },
     shape: {
-        borderRadius: 9,
+        borderRadius: shapeBorderRadius,
     },
     videoThumbnail: {
         borderTopRightRadius: thumbnailBorderRadius,
@@ -38,30 +44,30 @@ export const lightTheme: ThemeOptions = {
     },
     shadows: [
         'none',
-        '3px 3px 0 0 #474237',
-        '3px 3px 0 0 #474237',
-        '4px 4px 0 0 #474237',
-        '4px 4px 0 0 #474237',
-        '5px 5px 0 0 #474237',
-        '5px 5px 0 0 #474237',
-        '6px 6px 0 0 #474237',
-        '6px 6px 0 0 #474237',
-        '6px 6px 0 0 #474237',
-        '7px 7px 0 0 #474237',
-        '8px 8px 0 0 #474237',
-        '9px 9px 0 0 #474237',
-        '10px 10px 0 0 #474237',
-        '11px 11px 0 0 #474237',
-        '12px 12px 0 0 #474237',
-        '13px 13px 0 0 #474237',
-        '14px 14px 0 0 #474237',
-        '15px 15px 0 0 #474237',
-        '16px 16px 0 0 #474237',
-        '17px 17px 0 0 #474237',
-        '18px 18px 0 0 #474237',
-        '19px 19px 0 0 #474237',
-        '20px 20px 0 0 #474237',
-        '21px 21px 0 0 #474237',
+        gen3DBoxShadow(3, lightThemePrimaryLight),
+        gen3DBoxShadow(3, lightThemePrimaryLight),
+        gen3DBoxShadow(4, lightThemePrimaryLight),
+        gen3DBoxShadow(4, lightThemePrimaryLight),
+        gen3DBoxShadow(5, lightThemePrimaryLight),
+        gen3DBoxShadow(5, lightThemePrimaryLight),
+        gen3DBoxShadow(6, lightThemePrimaryLight),
+        gen3DBoxShadow(6, lightThemePrimaryLight),
+        gen3DBoxShadow(6, lightThemePrimaryLight),
+        gen3DBoxShadow(7, lightThemePrimaryLight),
+        gen3DBoxShadow(8, lightThemePrimaryLight),
+        gen3DBoxShadow(9, lightThemePrimaryLight),
+        gen3DBoxShadow(10, lightThemePrimaryLight),
+        gen3DBoxShadow(11, lightThemePrimaryLight),
+        gen3DBoxShadow(12, lightThemePrimaryLight),
+        gen3DBoxShadow(13, lightThemePrimaryLight),
+        gen3DBoxShadow(14, lightThemePrimaryLight),
+        gen3DBoxShadow(15, lightThemePrimaryLight),
+        gen3DBoxShadow(16, lightThemePrimaryLight),
+        gen3DBoxShadow(17, lightThemePrimaryLight),
+        gen3DBoxShadow(18, lightThemePrimaryLight),
+        gen3DBoxShadow(19, lightThemePrimaryLight),
+        gen3DBoxShadow(20, lightThemePrimaryLight),
+        gen3DBoxShadow(21, lightThemePrimaryLight),
     ],
     breakpoints: {
         values: {
@@ -73,26 +79,76 @@ export const lightTheme: ThemeOptions = {
         },
     },
     overrides: {
+        MuiAppBar: {
+            root: {
+                backgroundColor: '#ffffff'
+            }
+        },
+        MuiDrawer: {
+            paper: {
+                backgroundColor: '#ffffff',
+            },
+        },
         MuiButton: {
             containedSecondary: {
                 color: 'white',
             },
+            colorInherit: {
+                backgroundColor: 'transparent',
+                '&:hover': {
+                    backgroundColor: 'transparent',
+                }
+            }
+        },
+        MuiInputBase: {
+            root: {
+                borderTopLeftRadius: shapeBorderRadius+1,
+                borderTopRightRadius: shapeBorderRadius+1,
+                borderBottomLeftRadius: shapeBorderRadius+1,
+                borderBottomRightRadius: shapeBorderRadius+1,
+                border: `1px solid ${lightThemePrimaryLight}`,
+                boxShadow: gen3DBoxShadow(2, lightThemePrimaryLight)
+            }
+        }
+    },
+    props: {
+        MuiAppBar: {
+            color: 'inherit',
+        },
+        MuiPaper: {
+            variant: 'outlined',
+        },
+        MuiButton: {
+            disableElevation: true,
+            variant: 'outlined',
+            disableRipple: true,
+            disableFocusRipple: true,
+            disableTouchRipple: true,
         },
     },
+
 }
+
+const darkThemePrimaryMain = "#2CAAAA"
+const darkThemePrimaryLight = "#7cd3d6"
+const darkThemeSecondaryMain = "#ED8796"
+const darkThemeBackgroundDefault = "#474237"
+const darkThemeBackgroundPaper = "#35322d"
+
 
 export const darkTheme: ThemeOptions = {
     palette: {
         type: 'dark',
         primary: {
-            main: '#2CAAAA',
+            main: darkThemePrimaryMain,
+            light: darkThemePrimaryLight
         },
         secondary: {
-            main: '#ED8796',
+            main: darkThemeSecondaryMain,
         },
         background: {
-            default: '#474237',
-            paper: '#35322d',
+            default: darkThemeBackgroundDefault,
+            paper: darkThemeBackgroundPaper,
         },
     },
     typography: {
@@ -116,30 +172,30 @@ export const darkTheme: ThemeOptions = {
     },
     shadows: [
         'none',
-        '3px 3px 0 0 #fff',
-        '3px 3px 0 0 #fff',
-        '4px 4px 0 0 #fff',
-        '4px 4px 0 0 #fff',
-        '5px 5px 0 0 #fff',
-        '5px 5px 0 0 #fff',
-        '6px 6px 0 0 #fff',
-        '6px 6px 0 0 #fff',
-        '6px 6px 0 0 #fff',
-        '7px 7px 0 0 #fff',
-        '8px 8px 0 0 #fff',
-        '9px 9px 0 0 #fff',
-        '10px 10px 0 0 #fff',
-        '11px 11px 0 0 #fff',
-        '12px 12px 0 0 #fff',
-        '13px 13px 0 0 #fff',
-        '14px 14px 0 0 #fff',
-        '15px 15px 0 0 #fff',
-        '16px 16px 0 0 #fff',
-        '17px 17px 0 0 #fff',
-        '18px 18px 0 0 #fff',
-        '19px 19px 0 0 #fff',
-        '20px 20px 0 0 #fff',
-        '21px 21px 0 0 #fff',
+        gen3DBoxShadow(3, "#fff"),
+        gen3DBoxShadow(3, "#fff"),
+        gen3DBoxShadow(4, "#fff"),
+        gen3DBoxShadow(4, "#fff"),
+        gen3DBoxShadow(5, "#fff"),
+        gen3DBoxShadow(5, "#fff"),
+        gen3DBoxShadow(6, "#fff"),
+        gen3DBoxShadow(6, "#fff"),
+        gen3DBoxShadow(6, "#fff"),
+        gen3DBoxShadow(7, "#fff"),
+        gen3DBoxShadow(8, "#fff"),
+        gen3DBoxShadow(9, "#fff"),
+        gen3DBoxShadow(10, "#fff"),
+        gen3DBoxShadow(11, "#fff"),
+        gen3DBoxShadow(12, "#fff"),
+        gen3DBoxShadow(13, "#fff"),
+        gen3DBoxShadow(14, "#fff"),
+        gen3DBoxShadow(15, "#fff"),
+        gen3DBoxShadow(16, "#fff"),
+        gen3DBoxShadow(17, "#fff"),
+        gen3DBoxShadow(18, "#fff"),
+        gen3DBoxShadow(19, "#fff"),
+        gen3DBoxShadow(20, "#fff"),
+        gen3DBoxShadow(21, "#fff"),
     ],
     breakpoints: {
         values: {
@@ -155,6 +211,34 @@ export const darkTheme: ThemeOptions = {
             containedSecondary: {
                 color: 'white',
             },
+        },
+        MuiInputBase: {
+            root: {
+                borderTopLeftRadius: shapeBorderRadius+1,
+                borderTopRightRadius: shapeBorderRadius+1,
+                borderBottomLeftRadius: shapeBorderRadius+1,
+                borderBottomRightRadius: shapeBorderRadius+1,
+                border: `1px solid ${darkThemePrimaryLight}`,
+                boxShadow: gen3DBoxShadow(2, darkThemePrimaryLight)
+            }
+        },
+        MuiDrawer: {
+            paper: {
+                backgroundColor: darkThemePrimaryMain,
+                color: darkThemeBackgroundPaper,
+            }
+        }
+    },
+    props: {
+        MuiPaper: {
+            variant: 'outlined',
+        },
+        MuiButton: {
+            disableElevation: true,
+            variant: 'outlined',
+            disableRipple: true,
+            disableFocusRipple: true,
+            disableTouchRipple: true,
         },
     },
 }

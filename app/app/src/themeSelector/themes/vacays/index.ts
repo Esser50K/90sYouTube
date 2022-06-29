@@ -1,14 +1,19 @@
 import 'typeface-lato';
 import logo from './logo.png'
 import {ThemeOptions} from "@material-ui/core";
+import { gen3DBoxShadow } from '../../../utils';
 
-const thumbnailBorderRadius = 12
+const shapeBorderRadius = 16;
+const thumbnailBorderRadius = 12;
+const lightThemePrimaryMain = "#F27D59";
+const lightThemePrimaryLight = "#ffa387";
 
 export const lightTheme: ThemeOptions = {
     palette: {
         type: 'light',
         primary: {
-            main: '#F27D59',
+            main: lightThemePrimaryMain,
+            light: lightThemePrimaryLight
         },
         secondary: {
             main: '#FCDA95',
@@ -23,12 +28,12 @@ export const lightTheme: ThemeOptions = {
         fontSize: 12,
     },
     shape: {
-        borderRadius: 16,
+        borderRadius: shapeBorderRadius,
     },
     videoThumbnail: {
         borderTopRightRadius: thumbnailBorderRadius,
         borderBottomRightRadius: thumbnailBorderRadius,
-        borderBottomLeftRadius: 0,
+        borderBottomLeftRadius: thumbnailBorderRadius,
         borderTopLeftRadius: thumbnailBorderRadius,
     },
     logo: {
@@ -37,33 +42,6 @@ export const lightTheme: ThemeOptions = {
     search: {
         border: 'none',
     },
-    shadows: [
-        'none',
-        '3px 3px 0 0 #3E3543',
-        '3px 3px 0 0 #3E3543',
-        '4px 4px 0 0 #3E3543',
-        '4px 4px 0 0 #3E3543',
-        '5px 5px 0 0 #3E3543',
-        '5px 5px 0 0 #3E3543',
-        '6px 6px 0 0 #3E3543',
-        '6px 6px 0 0 #3E3543',
-        '6px 6px 0 0 #3E3543',
-        '7px 7px 0 0 #3E3543',
-        '8px 8px 0 0 #3E3543',
-        '9px 9px 0 0 #3E3543',
-        '10px 10px 0 0 #3E3543',
-        '11px 11px 0 0 #3E3543',
-        '12px 12px 0 0 #3E3543',
-        '13px 13px 0 0 #3E3543',
-        '14px 14px 0 0 #3E3543',
-        '15px 15px 0 0 #3E3543',
-        '16px 16px 0 0 #3E3543',
-        '17px 17px 0 0 #3E3543',
-        '18px 18px 0 0 #3E3543',
-        '19px 19px 0 0 #3E3543',
-        '20px 20px 0 0 #3E3543',
-        '21px 21px 0 0 #3E3543',
-    ],
     breakpoints: {
         values: {
             xs: 0,
@@ -73,13 +51,46 @@ export const lightTheme: ThemeOptions = {
             xl: 2280,
         },
     },
+    overrides: {
+        MuiDrawer: {
+            paper: {
+                backgroundColor: lightThemePrimaryMain,
+            },
+        },
+        MuiInputBase: {
+            root: {
+                borderTopLeftRadius: shapeBorderRadius+1,
+                borderTopRightRadius: shapeBorderRadius+1,
+                borderBottomLeftRadius: shapeBorderRadius+1,
+                borderBottomRightRadius: shapeBorderRadius+1,
+                border: `1px solid ${lightThemePrimaryLight}`,
+                boxShadow: gen3DBoxShadow(2, lightThemePrimaryLight)
+            }
+        }
+    },
+    props: {
+        MuiPaper: {
+            variant: 'outlined',
+        },
+        MuiButton: {
+            disableElevation: true,
+            variant: 'outlined',
+            disableRipple: true,
+            disableFocusRipple: true,
+            disableTouchRipple: true,
+        },
+    },
 }
+
+const darkThemePrimaryMain = "#c74a24";
+const darkThemePrimaryLight = "#F4977A";
 
 export const darkTheme: ThemeOptions = {
     palette: {
         type: 'dark',
         primary: {
-            main: '#F27D59',
+            main: darkThemePrimaryMain,
+            light: darkThemePrimaryLight
         },
         secondary: {
             main: '#FCDA95',
@@ -94,12 +105,12 @@ export const darkTheme: ThemeOptions = {
         fontSize: 12,
     },
     shape: {
-        borderRadius: 16,
+        borderRadius: shapeBorderRadius,
     },
     videoThumbnail: {
         borderTopRightRadius: thumbnailBorderRadius,
         borderBottomRightRadius: thumbnailBorderRadius,
-        borderBottomLeftRadius: 0,
+        borderBottomLeftRadius: thumbnailBorderRadius,
         borderTopLeftRadius: thumbnailBorderRadius,
     },
     logo: {
@@ -108,33 +119,6 @@ export const darkTheme: ThemeOptions = {
     search: {
         border: 'none',
     },
-    shadows: [
-        'none',
-        '3px 3px 0 0 #fff',
-        '3px 3px 0 0 #fff',
-        '4px 4px 0 0 #fff',
-        '4px 4px 0 0 #fff',
-        '5px 5px 0 0 #fff',
-        '5px 5px 0 0 #fff',
-        '6px 6px 0 0 #fff',
-        '6px 6px 0 0 #fff',
-        '6px 6px 0 0 #fff',
-        '7px 7px 0 0 #fff',
-        '8px 8px 0 0 #fff',
-        '9px 9px 0 0 #fff',
-        '10px 10px 0 0 #fff',
-        '11px 11px 0 0 #fff',
-        '12px 12px 0 0 #fff',
-        '13px 13px 0 0 #fff',
-        '14px 14px 0 0 #fff',
-        '15px 15px 0 0 #fff',
-        '16px 16px 0 0 #fff',
-        '17px 17px 0 0 #fff',
-        '18px 18px 0 0 #fff',
-        '19px 19px 0 0 #fff',
-        '20px 20px 0 0 #fff',
-        '21px 21px 0 0 #fff',
-    ],
     breakpoints: {
         values: {
             xs: 0,
@@ -142,6 +126,35 @@ export const darkTheme: ThemeOptions = {
             md: 960,
             lg: 1280,
             xl: 2280,
+        },
+    },
+    overrides: {
+        MuiDrawer: {
+            paper: {
+                backgroundColor: darkThemePrimaryMain,
+            },
+        },
+        MuiInputBase: {
+            root: {
+                borderTopLeftRadius: shapeBorderRadius+1,
+                borderTopRightRadius: shapeBorderRadius+1,
+                borderBottomLeftRadius: shapeBorderRadius+1,
+                borderBottomRightRadius: shapeBorderRadius+1,
+                border: `1px solid ${darkThemePrimaryLight}`,
+                boxShadow: gen3DBoxShadow(2, darkThemePrimaryLight)
+            }
+        }
+    },
+    props: {
+        MuiPaper: {
+            variant: 'outlined',
+        },
+        MuiButton: {
+            disableElevation: true,
+            variant: 'outlined',
+            disableRipple: true,
+            disableFocusRipple: true,
+            disableTouchRipple: true,
         },
     },
 }
