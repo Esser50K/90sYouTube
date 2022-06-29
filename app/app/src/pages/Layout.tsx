@@ -107,8 +107,9 @@ const useStyles = makeStyles((theme: Theme) =>
             }
         },
         drawerPaper: {
-            backgroundColor: theme.palette.background.paper,
-            color: theme.palette.background.default,
+            // backgroundColor: theme.palette.background.paper,
+            // backgroundColor: theme.palette.primary.main,
+            // color: theme.palette.background.default,
             width: drawerWidth,
             paddingTop: theme.spacing(2.5),
             border: "none",
@@ -227,13 +228,17 @@ function Layout({drawerCollapsed = false}) {
             <Typography variant="h6" className={classes.themesHeading}>Select theme</Typography>
             <ButtonGroup
                 orientation="vertical"
-                color="primary"
+                color="inherit"
                 aria-label="vertical contained primary button group"
                 variant="text"
             >
                 {
                     Object.entries(themes).map(theme => (
-                        <Button key={theme[0]} onClick={() => setTheme(theme[0])} disabled={theme[0] === currentTheme}>{ theme[0] }</Button>
+                        <Button key={theme[0]}
+                                onClick={() => setTheme(theme[0])}
+                                disabled={theme[0] === currentTheme}>
+                            { theme[0] }
+                        </Button>
                     ))
                 }
             </ButtonGroup>

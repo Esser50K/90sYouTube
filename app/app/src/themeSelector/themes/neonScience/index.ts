@@ -90,6 +90,11 @@ export const darkTheme: ThemeOptions = {
                 color: '#fff',
             },
         },
+        MuiDrawer: {
+            paper: {
+                backgroundColor: '#AF3F68',
+            },
+        },
         MuiInputBase: {
             root: {
                 borderTopLeftRadius: shapeBorderRadius+1,

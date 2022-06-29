@@ -6,7 +6,7 @@ import { gen3DBoxShadow } from '../../../utils';
 const shapeBorderRadius = 16;
 const thumbnailBorderRadius = 12;
 const lightThemePrimaryMain = "#F27D59";
-const lightThemePrimaryLight = "#F4977A";
+const lightThemePrimaryLight = "#ffa387";
 
 export const lightTheme: ThemeOptions = {
     palette: {
@@ -52,6 +52,11 @@ export const lightTheme: ThemeOptions = {
         },
     },
     overrides: {
+        MuiDrawer: {
+            paper: {
+                backgroundColor: lightThemePrimaryMain,
+            },
+        },
         MuiInputBase: {
             root: {
                 borderTopLeftRadius: shapeBorderRadius+1,
@@ -77,7 +82,7 @@ export const lightTheme: ThemeOptions = {
     },
 }
 
-const darkThemePrimaryMain = "#F27D59";
+const darkThemePrimaryMain = "#c74a24";
 const darkThemePrimaryLight = "#F4977A";
 
 export const darkTheme: ThemeOptions = {
@@ -124,6 +129,11 @@ export const darkTheme: ThemeOptions = {
         },
     },
     overrides: {
+        MuiDrawer: {
+            paper: {
+                backgroundColor: darkThemePrimaryMain,
+            },
+        },
         MuiInputBase: {
             root: {
                 borderTopLeftRadius: shapeBorderRadius+1,

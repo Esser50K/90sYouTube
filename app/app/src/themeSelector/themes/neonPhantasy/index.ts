@@ -5,8 +5,8 @@ import {ThemeOptions} from "@material-ui/core";
 import { gen3DBoxShadow } from '../../../utils';
 
 const shapeBorderRadius = 0;
-const lightThemePrimaryMain = "#3f51b5"
-const lightThemePrimaryLight = "#5C67B7"
+const lightThemePrimaryMain = "#4050b5"
+const lightThemePrimaryLight = "#6c7dd9"
 
 export const lightTheme: ThemeOptions = {
     palette: {
@@ -55,7 +55,12 @@ export const lightTheme: ThemeOptions = {
                 border: `1px solid ${lightThemePrimaryLight}`,
                 boxShadow: gen3DBoxShadow(2, lightThemePrimaryLight)
             }
-        }
+        },
+        MuiDrawer: {
+            paper: {
+                backgroundColor: lightThemePrimaryMain,
+            },
+        },
     },
     shape: {
         borderRadius: shapeBorderRadius,
@@ -211,6 +216,11 @@ export const darkTheme: ThemeOptions = {
             colorInherit: {
                 backgroundColor: paperBackground,
                 color: '#fff',
+            },
+        },
+        MuiDrawer: {
+            paper: {
+                backgroundColor: paperBackground,
             },
         },
         MuiInputBase: {

@@ -54,12 +54,6 @@ export const lightTheme: ThemeOptions = {
                 }
             }
         },
-        MuiAppBar: {
-            colorInherit: {
-                backgroundColor: '#ffffff',
-                color: '#000000',
-            },
-        },
         MuiInputBase: {
             root: {
                 borderTopLeftRadius: shapeBorderRadius+1,
@@ -69,7 +63,19 @@ export const lightTheme: ThemeOptions = {
                 border: `1px solid ${primaryLight}`,
                 boxShadow: gen3DBoxShadow(2, primaryLight)
             }
-        }
+        },
+        MuiAppBar: {
+            root: {
+                backgroundColor: '#ffffff',
+                color: '#000000',
+            },
+        },
+        MuiDrawer: {
+            paper: {
+                backgroundColor: '#ffffff',
+                color: '#000000',
+            },
+        },
     },
     shape: {
         borderRadius: shapeBorderRadius,

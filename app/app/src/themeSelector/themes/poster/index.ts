@@ -20,6 +20,7 @@ export const lightTheme: ThemeOptions = {
         },
         background: {
             default: '#ECF7F9',
+            paper: '#ECF7F9'
         },
     },
     typography: {
@@ -78,6 +79,16 @@ export const lightTheme: ThemeOptions = {
         },
     },
     overrides: {
+        MuiAppBar: {
+            root: {
+                backgroundColor: '#ffffff'
+            }
+        },
+        MuiDrawer: {
+            paper: {
+                backgroundColor: '#ffffff',
+            },
+        },
         MuiButton: {
             containedSecondary: {
                 color: 'white',
@@ -89,7 +100,6 @@ export const lightTheme: ThemeOptions = {
                 }
             }
         },
-
         MuiInputBase: {
             root: {
                 borderTopLeftRadius: shapeBorderRadius+1,
@@ -121,6 +131,10 @@ export const lightTheme: ThemeOptions = {
 
 const darkThemePrimaryMain = "#2CAAAA"
 const darkThemePrimaryLight = "#7cd3d6"
+const darkThemeSecondaryMain = "#ED8796"
+const darkThemeBackgroundDefault = "#474237"
+const darkThemeBackgroundPaper = "#35322d"
+
 
 export const darkTheme: ThemeOptions = {
     palette: {
@@ -130,11 +144,11 @@ export const darkTheme: ThemeOptions = {
             light: darkThemePrimaryLight
         },
         secondary: {
-            main: '#ED8796',
+            main: darkThemeSecondaryMain,
         },
         background: {
-            default: '#474237',
-            paper: '#35322d',
+            default: darkThemeBackgroundDefault,
+            paper: darkThemeBackgroundPaper,
         },
     },
     typography: {
@@ -206,6 +220,12 @@ export const darkTheme: ThemeOptions = {
                 borderBottomRightRadius: shapeBorderRadius+1,
                 border: `1px solid ${darkThemePrimaryLight}`,
                 boxShadow: gen3DBoxShadow(2, darkThemePrimaryLight)
+            }
+        },
+        MuiDrawer: {
+            paper: {
+                backgroundColor: darkThemePrimaryMain,
+                color: darkThemeBackgroundPaper,
             }
         }
     },
