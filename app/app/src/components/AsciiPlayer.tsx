@@ -1,5 +1,5 @@
 import YouTubePlayer from 'youtube-player';
-import { useEffect, useState } from 'react';
+import {useEffect, useRef, useState} from 'react';
 import './AsciiPlayer.css';
 
 export enum PlayerState {
@@ -36,7 +36,7 @@ function AsciiPlayer(props: AsciiPlayerProps) {
     const [windowSize, setWindowSize] = useState([0, 0])
     const [playerState, setPlayerState] = useState(PlayerState.Empty)
     const [ytPlayer, setYtPlayer] = useState<any>(null)
-
+    const playerContainer = useRef<HTMLDivElement>(null)
 
     const loading = [
         `    __                      __ _                  \n   / /   ____   ____ _ ____/ /(_)____   ____ _    \n  / /   / __ \\ / __ \`// __  // // __ \\ / __ \`/    \n / /___/ /_/ // /_/ // /_/ // // / / // /_/ /  _  \n/_____/\\____/ \\__,_/ \\__,_//_//_/ /_/ \\__, /  (_) \n                                     /____/       `,
@@ -137,21 +137,22 @@ function AsciiPlayer(props: AsciiPlayerProps) {
             return
         }
 
-        let newLineHeight = 0
-        let newFontSize = 0
+        let newLineHeight: number
+        let newFontSize: number
 
         // this is the character ratio of a base monospace font
         const characterRatio = 5 / 3
         const windowPortion = 0.75
         const ratio = lineLength / nLines
-        const heightLimited = (lineLength / window.innerWidth) < (nLines / window.innerHeight)
-        const limiter = heightLimited ? window.innerHeight : window.innerWidth
+        const heightLimited = (lineLength / playerContainer.current!.clientWidth) < (nLines / window.innerHeight)
+        const fontAdjustment = 1.1  // scale adjustment for fitting the text block to the container width - depends on the width of the character in font family
+        const limiter = heightLimited ? window.innerHeight : playerContainer.current!.clientWidth * fontAdjustment
         if (limiter === window.innerHeight) {
             newLineHeight = (limiter / nLines) * windowPortion
             newFontSize = (((limiter * ratio) / lineLength) * characterRatio) * windowPortion
         } else {
-            newFontSize = ((limiter / lineLength) * characterRatio) * windowPortion
-            newLineHeight = ((limiter * (1 / ratio)) / nLines) * windowPortion
+            newFontSize = ((limiter / lineLength) * characterRatio)
+            newLineHeight = ((limiter * (1 / ratio)) / nLines)
         }
 
         if (props.isMobile) {
@@ -193,7 +194,7 @@ function AsciiPlayer(props: AsciiPlayerProps) {
     }
 
     return (props.show ?
-        <div className="player-container">
+        <div className="player-container" ref={playerContainer}>
             <div
                 className="ascii-player"
                 style={playerState === PlayerState.Loading ? { position: 'relative' } : {}}
