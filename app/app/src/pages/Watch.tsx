@@ -47,7 +47,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 function Watch() {
     const [searchParams] = useSearchParams();
-    const isMobile = useMediaQuery((theme: Theme) => theme.breakpoints.down('md'));
+    const isMobile = useMediaQuery((theme: Theme) => theme.breakpoints.down('sm'));
     const [playerContent, setPlayerContent] = useState("")
     const [muted, setMuted] = useState(false)
     const [image, setImage] = useState()
@@ -143,7 +143,7 @@ function Watch() {
                     }
                 </div>
                 <div className={classes.layoutSidebar}>
-                    <FeaturedVideos videos={featuredVideos}/>
+                    <FeaturedVideos videos={featuredVideos} columnLayout={!isMobile} />
                 </div>
             </div>
             {muted ? <Toast text={(isMobile ? "tap" : "click") + " to unmute"}/> : null}

@@ -5,4 +5,5 @@ export default interface FeaturedVideosProps {
         id: number,
         props: YoutubeVideoThumbnailProps,
     }[]
+    columnLayout?: boolean
 }
