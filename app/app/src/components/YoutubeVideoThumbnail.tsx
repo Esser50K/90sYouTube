@@ -16,12 +16,21 @@ const useStyles = makeStyles((theme: Theme) =>
         },
         actionArea: {
             display: 'grid',
+            gridTemplate: "'thumbnail' auto 'videoMetadata' auto / 1fr",
             alignContent: 'start',
             justifyContent: 'stretch',
+            [theme.breakpoints.up('md')]: {
+                gridTemplate: "'thumbnail videoMetadata' auto / 168px 1fr",
+                gap: theme.spacing(3),
+                alignContent: 'start',
+                justifyContent: 'stretch',
+                alignItems: 'start',
+            },
             height: '100%',
             padding: theme.spacing(1.5),
         },
         thumbnail: {
+            gridArea: 'thumbnail',
             backgroundSize: "cover",
             '&:hover': {
                 transform: 'translateY(-2px)',
@@ -43,6 +52,9 @@ const useStyles = makeStyles((theme: Theme) =>
                 paddingBottom: "calc(100% / (16/9))",
             },
             marginBottom: theme.spacing(2.5),
+            [theme.breakpoints.up('md')]: {
+                marginBottom: 0,
+            },
             ...gen3DBoxShadowStyle(5, theme),
             borderTopRightRadius: theme.videoThumbnail.borderTopRightRadius,
             borderBottomRightRadius: theme.videoThumbnail.borderBottomRightRadius,
@@ -50,6 +62,7 @@ const useStyles = makeStyles((theme: Theme) =>
             borderTopLeftRadius: theme.videoThumbnail.borderTopLeftRadius,
         },
         videoMetadata: {
+            gridArea: 'videoMetadata',
             display: 'grid',
             gridTemplateAreas: "'avatar text'",
             gap: theme.spacing(1),
