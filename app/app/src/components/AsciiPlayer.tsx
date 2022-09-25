@@ -145,7 +145,7 @@ function AsciiPlayer(props: AsciiPlayerProps) {
         const windowPortion = 0.75
         const ratio = lineLength / nLines
         const heightLimited = (lineLength / playerContainer.current!.clientWidth) < (nLines / window.innerHeight)
-        const fontAdjustment = 1.1  // scale adjustment for fitting the text block to the container width - depends on the width of the character in font family
+        const fontAdjustment = .95  // scale adjustment for fitting the text block to the container width - depends on the width of the character in font family
         const limiter = heightLimited ? window.innerHeight : playerContainer.current!.clientWidth * fontAdjustment
         if (limiter === window.innerHeight) {
             newLineHeight = (limiter / nLines) * windowPortion
